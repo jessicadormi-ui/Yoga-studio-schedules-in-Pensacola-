@@ -102,6 +102,53 @@ DAY_RE = re.compile(r"^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday
 TIME_RE = re.compile(r"^(\d{1,2}):(\d{2}) (AM|PM)$")
 SKIP_LOCATIONS = ("Remote", "Virtual", "Coming Soon")
 
+URU_DAY_RE = re.compile(r"^\w+, (January|February|March|April|May|June|July|August|"
+                        r"September|October|November|December) (\d{1,2})$")
+URU_TIME_RE = re.compile(r"(\d{1,2}):(\d{2}) (am|pm)")
+
+
+def uru():
+    """Scrape URU's own site, which server-renders its Mindbody schedule as HTML.
+
+    Each location page has a list-view table (class mz-schedule-filter): 'header'
+    rows carry 'Saturday, July 4' (no year); class rows carry time range, name,
+    instructor. Pages cover a rolling week starting today.
+    """
+    from bs4 import BeautifulSoup
+    pages = [("uru-one-schedule", "Airport"), ("uru2-class-schedule", "Nine Mile"),
+             ("uru3-gulf-breeze", "Gulf Breeze")]
+    out = []
+    for slug, loc in pages:
+        r = requests.get(f"https://www.uruyoga.com/full-schedule/{slug}/",
+                         headers={"User-Agent": UA["User-Agent"]}, timeout=30)
+        r.raise_for_status()
+        tables = BeautifulSoup(r.text, "html.parser").find_all(
+            "table", class_="mz-schedule-filter")
+        if not tables:
+            continue
+        cur_date = None
+        for row in tables[-1].find_all("tr"):
+            cls = row.get("class") or []
+            cells = [c.get_text(" ", strip=True) for c in row.find_all(["td", "th"])]
+            if "header" in cls and cells:
+                m = URU_DAY_RE.match(cells[0])
+                if m:
+                    d = dt.datetime.strptime(
+                        f"{m.group(1)} {m.group(2)} {TODAY.year}", "%B %d %Y").date()
+                    if d < TODAY - dt.timedelta(days=180):  # year rollover
+                        d = d.replace(year=d.year + 1)
+                    cur_date = d
+            elif "mz_schedule_table" in cls and cur_date and len(cells) >= 3:
+                tm = URU_TIME_RE.search(cells[0])
+                if not tm or not (START <= cur_date <= END):
+                    continue
+                hour = int(tm.group(1)) % 12 + (12 if tm.group(3) == "pm" else 0)
+                out.append({"date": str(cur_date),
+                            "time": f"{hour:02d}:{tm.group(2)}",
+                            "name": cells[1],
+                            "instructor": f"{cells[2]} · {loc}"})
+    return out
+
 
 def zenplanner(subdomain):
     """Parse Zen Planner weekly LIST view. Fetch two weeks to cover a rolling window."""
@@ -170,6 +217,10 @@ STUDIOS = [
      "platform": "fitDEGREE", "color": "#7C6BC4",
      "booking_url": "https://app.fitdegree.com/t/dashboard/fitspot/74",
      "fetch": lambda: fitdegree(74)},
+    {"name": "URU Yoga & Beyond", "area": "Pensacola & Gulf Breeze (3 locations)",
+     "platform": "Mindbody (via uruyoga.com)", "color": "#3E7CB1",
+     "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
+     "fetch": uru},
     {"name": "Florida Power Yoga", "area": "N Davis Hwy, Pensacola",
      "platform": "Zen Planner", "color": "#4E8F6B",
      "booking_url": "https://floridapoweryogapensacola.sites.zenplanner.com/calendar.cfm",
@@ -177,6 +228,10 @@ STUDIOS = [
 ]
 
 LINK_ONLY = [
+    {"name": "Emerald Coast Yoga & Expressive Arts", "area": "East Hill, Pensacola",
+     "platform": "GoDaddy bookings",
+     "booking_url": "https://emeraldcoastyoga.org/online-appointments",
+     "note": "Schedule sits behind GoDaddy's sign-in booking system — register on their site."},
     {"name": "Seek Yoga", "area": "East Lee St, Pensacola", "platform": "WellnessLiving",
      "booking_url": "https://www.seekyoga.com/seekclasses",
      "note": "Schedule lives in a WellnessLiving widget (signed API) — open their page."},

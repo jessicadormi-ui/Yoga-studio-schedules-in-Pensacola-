@@ -47,7 +47,21 @@ Titles may carry a "(0/45)" suffix (stripped); "(N spots left)" lines are skippe
 locations containing Remote/Virtual/"Coming Soon" are filtered out
 (they list other/planned locations in the same calendar).
 
+### URU Yoga & Beyond — Mindbody, scraped via their own website
+Mindbody's API is paid/bot-protected, BUT uruyoga.com server-renders the full
+Mindbody schedule as plain HTML. Three location pages, each covering a rolling
+week starting today:
+`https://www.uruyoga.com/full-schedule/{uru-one-schedule|uru2-class-schedule|uru3-gulf-breeze}/`
+Parse the LAST `table.mz-schedule-filter` on each page (the first is a grid view):
+rows with class `header` carry the date ("Saturday, July 4" — no year, so infer
+year with a rollover check); rows with class `mz_schedule_table` carry
+[time range, class name, instructor]. Location label is appended to instructor.
+If this breaks, check whether their site still embeds the "mz" (healcode/Mindbody)
+widget server-side; if they switch to the JS widget, URU becomes link-only.
+
 ### Link-only studios (intentionally not scraped)
+- **Emerald Coast Yoga & Expressive Arts** — GoDaddy Websites+Marketing built-in
+  booking; /calendar renders no times, everything is behind sign-in. Link-only.
 - **Seek Yoga** — WellnessLiving embeds (`k_skin=186912` on seekyoga.com). WL's API
   requires HMAC-signed requests; bundles are obfuscated CloudFront blobs. Not worth it.
 - **ChiroYoga** — Jane App (`chiroyoga.janeapp.com`). Jane exposes clean JSON
@@ -62,8 +76,6 @@ locations containing Remote/Virtual/"Coming Soon" are filtered out
 - `fetch_schedules.py` exits 1 only if *all* studios fail, so a single broken
   scraper won't fail the cron run; per-studio errors are written into
   `schedule.json` and rendered as a notice with a fallback link.
-- If the user wants more studios later: URU Yoga uses Mindbody (studioid=43474) —
-  bot-protected and API is paid; treat as link-only unless that changes.
 
 ## Deploy (what the user will ask for)
 ```bash

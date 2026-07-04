@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-04T14:10-05:00",
+ "generated_at": "2026-07-04T15:44-05:00",
  "week_start": "2026-07-04",
  "week_end": "2026-07-10",
  "timezone": "America/Chicago",
@@ -455,6 +455,424 @@
    "error": null
   },
   {
+   "name": "URU Yoga & Beyond",
+   "area": "Pensacola & Gulf Breeze (3 locations)",
+   "platform": "Mindbody (via uruyoga.com)",
+   "color": "#3E7CB1",
+   "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
+   "classes": [
+    {
+     "date": "2026-07-04",
+     "time": "07:00",
+     "name": "HOT Invigorating Morning Yoga Flow",
+     "instructor": "NIkete Finley \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-04",
+     "time": "09:30",
+     "name": "HOT Vinyasa Flow Yoga",
+     "instructor": "Vananh Vu \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-04",
+     "time": "11:00",
+     "name": "Songbird Gentle Yoga Flow",
+     "instructor": "Lynn Ball Jackson \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-05",
+     "time": "09:00",
+     "name": "HOT Yoga Caliente",
+     "instructor": "Karen Elmore \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-05",
+     "time": "09:30",
+     "name": "HOT Yoga Flow",
+     "instructor": "Rebecca Sathre \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-05",
+     "time": "10:00",
+     "name": "Weekend Reset",
+     "instructor": "Bethany Mcclendon \u00b7 Nine Mile"
+    },
+    {
+     "date": "2026-07-05",
+     "time": "15:30",
+     "name": "Warm Self Love Slow Flow",
+     "instructor": "Alyssa Ferrer \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-05",
+     "time": "17:00",
+     "name": "Mellow Flow",
+     "instructor": "Meghan McMillan \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-05",
+     "time": "17:00",
+     "name": "Hot Vinyasa Flow",
+     "instructor": "Rebecca Sathre \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-05",
+     "time": "18:30",
+     "name": "Candlelight Restorative Yoga",
+     "instructor": "Tiffany Miller \u00b7 Nine Mile"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "08:35",
+     "name": "Hot Strengthening Vinyasa Flow +Soul",
+     "instructor": "Rebecca Sathre \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "09:00",
+     "name": "Ashtanga  Insipired Vinyasa",
+     "instructor": "Danielle Voss \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "10:30",
+     "name": "Gentle Reawakening Yoga",
+     "instructor": "Tiffany Miller \u00b7 Nine Mile"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "10:45",
+     "name": "Warm  Slow Flow  Therapeutic",
+     "instructor": "Rebecca Sathre \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "12:00",
+     "name": "Hot Vinyasa Power Flow",
+     "instructor": "Josh O'Leary \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "12:00",
+     "name": "Longevity Flow Gentle Yoga",
+     "instructor": "Marni Marni \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "12:00",
+     "name": "HOT Sweet & Sweaty Radiant Yoga",
+     "instructor": "Rebecca Sathre \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "16:30",
+     "name": "Sweet Slow Flow Yoga",
+     "instructor": "Jackie Morrow \u00b7 Nine Mile"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "17:30",
+     "name": "Embodied Vinyasa Yoga Flow",
+     "instructor": "Alexandra Amaya \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "17:30",
+     "name": "Dark Shakti Flow (warm)",
+     "instructor": "Sara Dean \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "17:30",
+     "name": "HOT Sweet & Sweaty Radiant Yoga",
+     "instructor": "Rebecca Sathre \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-06",
+     "time": "19:00",
+     "name": "HOT EDM POWER",
+     "instructor": "Hannah Ovington \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "06:00",
+     "name": "Hot Vibrant Vinyasa",
+     "instructor": "Hannah Webb \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "08:30",
+     "name": "Hot Vinyasa II",
+     "instructor": "Lisa Breitenwischer \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "09:00",
+     "name": "Restorative Yoga Practice",
+     "instructor": "Fallon Brown \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "09:30",
+     "name": "Light & Blissful Yoga Flow",
+     "instructor": "Natalie Pinter \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "10:30",
+     "name": "Intermediate Beginner Yoga Flow",
+     "instructor": "Shannon Campbell \u00b7 Nine Mile"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "12:00",
+     "name": "Creative Vinyasa Rasa Flow",
+     "instructor": "Linda Connolly \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "12:00",
+     "name": "Hot  Energizing Full Body Flow",
+     "instructor": "Julie Graham \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "12:00",
+     "name": "HOT YOGA FLOW",
+     "instructor": "Alexandra Amaya \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "16:00",
+     "name": "Empowered Warrior Flow (warm)",
+     "instructor": "Sara Dean \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "17:30",
+     "name": "HOT Flow YOGA",
+     "instructor": "Marc Reagan \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "17:30",
+     "name": "Come as You Are Yoga",
+     "instructor": "Rachel Earl \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "17:30",
+     "name": "HOT Vinyasa Yoga Flow",
+     "instructor": "Julie Graham \u00b7 Nine Mile"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "17:30",
+     "name": "Chiroyoga: Spinal Health Series",
+     "instructor": "Dr. Samarpan Anand Buchalter \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-07",
+     "time": "19:15",
+     "name": "Rockasana: Yoga Flow",
+     "instructor": "Marc Reagan \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-08",
+     "time": "08:30",
+     "name": "HOT Yoga Flow",
+     "instructor": "Linda Connolly \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-08",
+     "time": "09:30",
+     "name": "Warm  Slow Flow  Therapeutic",
+     "instructor": "Rebecca Sathre \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-08",
+     "time": "10:00",
+     "name": "Chair Yoga",
+     "instructor": "Bethany Mcclendon \u00b7 Nine Mile"
+    },
+    {
+     "date": "2026-07-08",
+     "time": "12:00",
+     "name": "Slow Flow Yoga",
+     "instructor": "Fallon Brown \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-08",
+     "time": "12:00",
+     "name": "Hot Sweet & Sweaty Vinyasa Flow",
+     "instructor": "Chassidy Fitkin \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-08",
+     "time": "12:00",
+     "name": "HOT Vinyasa Flow",
+     "instructor": "Natalie Pinter \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-08",
+     "time": "16:00",
+     "name": "Strength and Sweat",
+     "instructor": "Chassidy Fitkin \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-08",
+     "time": "16:30",
+     "name": "Sweet Slow Flow Yoga",
+     "instructor": "Jackie Morrow \u00b7 Nine Mile"
+    },
+    {
+     "date": "2026-07-08",
+     "time": "18:00",
+     "name": "HOT Vinyasa Flow Yoga",
+     "instructor": "Ella Brandt \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-09",
+     "time": "08:30",
+     "name": "Hot Vinyasa II",
+     "instructor": "Lisa Breitenwischer \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-09",
+     "time": "09:00",
+     "name": "Flow into Yin",
+     "instructor": "Rachel Botts \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-09",
+     "time": "09:30",
+     "name": "HOT Sweet & Sweaty Yoga",
+     "instructor": "Rebecca Sathre \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-09",
+     "time": "12:00",
+     "name": "Hot Sweet & Sweaty Vinyasa Flow",
+     "instructor": "Linda Connolly \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-09",
+     "time": "12:00",
+     "name": "Flow & Stillness: The Hybrid Vinyasa Experience",
+     "instructor": "Danielle Voss \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-09",
+     "time": "12:00",
+     "name": "Warm Vinyasa Flow",
+     "instructor": "Natalie Pinter \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-09",
+     "time": "15:00",
+     "name": "Yin Inspiration",
+     "instructor": "Rachel Blackwelder \u00b7 Nine Mile"
+    },
+    {
+     "date": "2026-07-09",
+     "time": "16:00",
+     "name": "Gentle Reset",
+     "instructor": "Sara Dean \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-09",
+     "time": "17:30",
+     "name": "Embodied Vinyasa Yoga Flow",
+     "instructor": "Alexandra Amaya \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-09",
+     "time": "17:30",
+     "name": "HOT Power Yoga Flow",
+     "instructor": "Rebecca Sathre \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-09",
+     "time": "18:00",
+     "name": "Hot Power Yoga Flow",
+     "instructor": "Shelby Nalepa \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-09",
+     "time": "19:00",
+     "name": "WARM Reset Your Spirit",
+     "instructor": "Hannah Ovington \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-10",
+     "time": "05:30",
+     "name": "Sunrise Yoga  AT BAYVIEW PARK",
+     "instructor": "Julie Graham \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-10",
+     "time": "08:05",
+     "name": "HOT Vinyasa Flow Yoga",
+     "instructor": "Julie Graham \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-10",
+     "time": "09:30",
+     "name": "Creative Vinyasa Rasa Flow",
+     "instructor": "Rebecca Sathre \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-10",
+     "time": "09:30",
+     "name": "M & M Yoga  (Meaningful Movement Yoga)",
+     "instructor": "Jackie Morrow \u00b7 Nine Mile"
+    },
+    {
+     "date": "2026-07-10",
+     "time": "09:30",
+     "name": "Slow Joyful Basics Flow Yoga",
+     "instructor": "Dagan Stafford \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-10",
+     "time": "10:45",
+     "name": "Warm Self Love Yin Yoga",
+     "instructor": "Natalie Pinter \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-10",
+     "time": "12:00",
+     "name": "Slow Flow Yoga",
+     "instructor": "Fallon Brown \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-10",
+     "time": "12:00",
+     "name": "Hot Sweet & Sweaty Vinyasa Flow",
+     "instructor": "Rebecca Sathre \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-10",
+     "time": "12:00",
+     "name": "HOT Ashtanga Inspired Vinyasa",
+     "instructor": "Danielle Voss \u00b7 Gulf Breeze"
+    },
+    {
+     "date": "2026-07-10",
+     "time": "17:30",
+     "name": "HOT Heart Opening Yoga Flow",
+     "instructor": "Alexandra Amaya \u00b7 Airport"
+    },
+    {
+     "date": "2026-07-10",
+     "time": "18:00",
+     "name": "Somatic Yoga, Breathe & Beyond",
+     "instructor": "Emina Halimovic \u00b7 Gulf Breeze"
+    }
+   ],
+   "error": null
+  },
+  {
    "name": "Florida Power Yoga",
    "area": "N Davis Hwy, Pensacola",
    "platform": "Zen Planner",
@@ -538,6 +956,13 @@
   }
  ],
  "link_only": [
+  {
+   "name": "Emerald Coast Yoga & Expressive Arts",
+   "area": "East Hill, Pensacola",
+   "platform": "GoDaddy bookings",
+   "booking_url": "https://emeraldcoastyoga.org/online-appointments",
+   "note": "Schedule sits behind GoDaddy's sign-in booking system \u2014 register on their site."
+  },
   {
    "name": "Seek Yoga",
    "area": "East Lee St, Pensacola",
