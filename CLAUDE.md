@@ -47,7 +47,8 @@ Titles may carry a "(0/45)" suffix (stripped); "(N spots left)" lines are skippe
 locations containing Remote/Virtual/"Coming Soon" are filtered out
 (they list other/planned locations in the same calendar).
 
-### URU Yoga & Beyond — Mindbody, scraped via their own website
+### URU (3 studio entries: Airport / Nine Mile / Gulf Breeze) — Mindbody, scraped via their own website
+Each location is its own studio entry/pill on the dashboard.
 Mindbody's API is paid/bot-protected, BUT uruyoga.com server-renders the full
 Mindbody schedule as plain HTML. Three location pages, each covering a rolling
 week starting today:
@@ -55,13 +56,20 @@ week starting today:
 Parse the LAST `table.mz-schedule-filter` on each page (the first is a grid view):
 rows with class `header` carry the date ("Saturday, July 4" — no year, so infer
 year with a rollover check); rows with class `mz_schedule_table` carry
-[time range, class name, instructor]. Location label is appended to instructor.
-If this breaks, check whether their site still embeds the "mz" (healcode/Mindbody)
+[time range, class name, instructor]. If this breaks, check whether their site still embeds the "mz" (healcode/Mindbody)
 widget server-side; if they switch to the JS widget, URU becomes link-only.
 
+### Emerald Coast Yoga — recurring schedule parsed from prose
+Their live calendar/booking (GoDaddy Websites+Marketing) is JS-rendered behind a
+lazy-loaded widget with no reachable public API. Instead, `emerald_coast()` parses
+the advertised weekly schedule from the prose on https://emeraldcoastyoga.org/classes
+(h4 titles + "5:30-6:30 pm - Tuesdays" style text; sections are duplicated for
+responsive layouts, so times pair with nearby day words and titles are corrected
+by word overlap). IMPORTANT: these entries are the published recurring schedule,
+not live availability — one-off cancellations won't show. If their prose format
+changes and parsing yields odd results, demote ECY to a link-only card.
+
 ### Link-only studios (intentionally not scraped)
-- **Emerald Coast Yoga & Expressive Arts** — GoDaddy Websites+Marketing built-in
-  booking; /calendar renders no times, everything is behind sign-in. Link-only.
 - **Seek Yoga** — WellnessLiving embeds (`k_skin=186912` on seekyoga.com). WL's API
   requires HMAC-signed requests; bundles are obfuscated CloudFront blobs. Not worth it.
 - **ChiroYoga** — Jane App (`chiroyoga.janeapp.com`). Jane exposes clean JSON

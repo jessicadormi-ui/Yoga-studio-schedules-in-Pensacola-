@@ -107,18 +107,15 @@ URU_DAY_RE = re.compile(r"^\w+, (January|February|March|April|May|June|July|Augu
 URU_TIME_RE = re.compile(r"(\d{1,2}):(\d{2}) (am|pm)")
 
 
-def uru():
-    """Scrape URU's own site, which server-renders its Mindbody schedule as HTML.
-
-    Each location page has a list-view table (class mz-schedule-filter): 'header'
-    rows carry 'Saturday, July 4' (no year); class rows carry time range, name,
+def uru(slug):
+    """Scrape one URU location page; their site server-renders the Mindbody
+    schedule as HTML. List-view table (class mz-schedule-filter): 'header' rows
+    carry 'Saturday, July 4' (no year); class rows carry time range, name,
     instructor. Pages cover a rolling week starting today.
     """
     from bs4 import BeautifulSoup
-    pages = [("uru-one-schedule", "Airport"), ("uru2-class-schedule", "Nine Mile"),
-             ("uru3-gulf-breeze", "Gulf Breeze")]
     out = []
-    for slug, loc in pages:
+    for slug, loc in [(slug, None)]:
         r = requests.get(f"https://www.uruyoga.com/full-schedule/{slug}/",
                          headers={"User-Agent": UA["User-Agent"]}, timeout=30)
         r.raise_for_status()
@@ -146,7 +143,102 @@ def uru():
                 out.append({"date": str(cur_date),
                             "time": f"{hour:02d}:{tm.group(2)}",
                             "name": cells[1],
-                            "instructor": f"{cells[2]} · {loc}"})
+                            "instructor": cells[2]})
+    return out
+
+
+ECY_DAYS = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
+            "friday": 4, "saturday": 5, "sunday": 6}
+ECY_FULL = {"mon": "monday", "tues": "tuesday", "wednes": "wednesday",
+            "thurs": "thursday", "fri": "friday", "satur": "saturday",
+            "sun": "sunday"}
+ECY_DAY = re.compile(r"\b(Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)days?\b", re.I)
+ECY_RANGE = re.compile(r"\b(Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)day\s*-\s*"
+                       r"(Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)day\b", re.I)
+ECY_TIME = re.compile(r"(\d{1,2})(?::(\d{2}))?\s*-\s*(\d{1,2})(?::\d{2})?\s*(am|pm)", re.I)
+
+
+def emerald_coast():
+    """Parse ECY's advertised weekly schedule from the prose on /classes.
+
+    Not a live feed (their booking system is behind GoDaddy sign-in), so this
+    reflects the recurring schedule as published — expand day-of-week patterns
+    into dated entries across the window. Titles are h4 headings; sections are
+    duplicated for responsive layouts, so pair each time with nearby day words
+    and re-title by word overlap when the flowing text beats the last heading.
+    """
+    from bs4 import BeautifulSoup
+    r = requests.get("https://emeraldcoastyoga.org/classes",
+                     headers={"User-Agent": UA["User-Agent"]}, timeout=30)
+    r.raise_for_status()
+    soup = BeautifulSoup(r.text, "html.parser")
+    titles = [t.get_text(" ", strip=True) for t in soup.find_all("h4")
+              if t.get_text(strip=True) and "cookie" not in t.get_text().lower()]
+    lines = [ln.strip() for ln in soup.get_text("\n", strip=True).split("\n")
+             if ln.strip()]
+
+    def day_set(text):
+        days = set()
+        rm = ECY_RANGE.search(text)
+        if rm:
+            a = ECY_DAYS[ECY_FULL[rm.group(1).lower()]]
+            b = ECY_DAYS[ECY_FULL[rm.group(2).lower()]]
+            days |= set(range(a, b + 1)) if a <= b else \
+                set(range(a, 7)) | set(range(0, b + 1))
+        for m in ECY_DAY.finditer(text):
+            days.add(ECY_DAYS[ECY_FULL[m.group(1).lower()]])
+        return days
+
+    found, seen = [], set()
+    cur, cur_inst, cur_ctx = None, "", ""
+    for idx, ln in enumerate(lines):
+        if ln in titles:
+            cur, cur_inst, cur_ctx = ln, "", ""
+            continue
+        im = re.search(r"(?:Join|Led by|with)\s+(?:ECY Owner\s+)?"
+                       r"((?:Dr\.\s+)?[A-Z][a-zA-Z.]+(?:\s+[A-Z][a-zA-Z]+)?)", ln)
+        if im and cur:
+            cur_inst, cur_ctx = im.group(1), ln
+        for tm in ECY_TIME.finditer(ln):
+            days = set()
+            for cand in (ln, lines[idx - 1] if idx else "",
+                         lines[idx + 1] if idx + 1 < len(lines) else ""):
+                days = day_set(cand)
+                if days:
+                    break
+            if not days and cur:
+                days = day_set(cur + "s")
+            if not days or not cur:
+                continue
+            title = cur
+            # re-title if the surrounding sentence matches another heading better
+            ctx_words = set(re.findall(r"[a-z]+", (cur_ctx + " " + ln).lower()))
+            stop = {"the", "and", "for", "with", "join", "class", "yoga", "a"}
+            best, best_n = title, len(set(re.findall(r"[a-z]+", title.lower()))
+                                       & ctx_words - stop)
+            for t in titles:
+                n = len((set(re.findall(r"[a-z]+", t.lower())) - stop) & ctx_words)
+                if n > best_n:
+                    best, best_n = t, n
+            title = best
+            sh, sm = int(tm.group(1)), int(tm.group(2) or 0)
+            eh, mer = int(tm.group(3)), tm.group(4).lower()
+            hour = sh % 12 + (12 if mer == "pm" else 0)
+            if mer == "pm" and sh > eh and sh != 12:
+                hour -= 12
+            key = (title, tuple(sorted(days)), hour, sm)
+            if key in seen:
+                continue
+            seen.add(key)
+            found.append((title, days, hour, sm, cur_inst))
+    out = []
+    for title, days, hour, sm, inst in found:
+        d = START
+        while d <= END:
+            if d.weekday() in days:
+                out.append({"date": str(d), "time": f"{hour:02d}:{sm:02d}",
+                            "name": title, "instructor": inst})
+            d += dt.timedelta(days=1)
     return out
 
 
@@ -217,10 +309,22 @@ STUDIOS = [
      "platform": "fitDEGREE", "color": "#7C6BC4",
      "booking_url": "https://app.fitdegree.com/t/dashboard/fitspot/74",
      "fetch": lambda: fitdegree(74)},
-    {"name": "URU Yoga & Beyond", "area": "Pensacola & Gulf Breeze (3 locations)",
+    {"name": "URU Airport", "area": "Executive Plaza Rd, Pensacola",
      "platform": "Mindbody (via uruyoga.com)", "color": "#3E7CB1",
      "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
-     "fetch": uru},
+     "fetch": lambda: uru("uru-one-schedule")},
+    {"name": "URU Nine Mile", "area": "Nine Mile Rd, Pensacola",
+     "platform": "Mindbody (via uruyoga.com)", "color": "#79A9D1",
+     "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
+     "fetch": lambda: uru("uru2-class-schedule")},
+    {"name": "URU Gulf Breeze", "area": "Gulf Breeze Pkwy",
+     "platform": "Mindbody (via uruyoga.com)", "color": "#28527A",
+     "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
+     "fetch": lambda: uru("uru3-gulf-breeze")},
+    {"name": "Emerald Coast Yoga", "area": "East Hill, Pensacola",
+     "platform": "Weekly schedule from their site", "color": "#4CA6A8",
+     "booking_url": "https://emeraldcoastyoga.org/online-appointments",
+     "fetch": emerald_coast},
     {"name": "Florida Power Yoga", "area": "N Davis Hwy, Pensacola",
      "platform": "Zen Planner", "color": "#4E8F6B",
      "booking_url": "https://floridapoweryogapensacola.sites.zenplanner.com/calendar.cfm",
@@ -228,10 +332,6 @@ STUDIOS = [
 ]
 
 LINK_ONLY = [
-    {"name": "Emerald Coast Yoga & Expressive Arts", "area": "East Hill, Pensacola",
-     "platform": "GoDaddy bookings",
-     "booking_url": "https://emeraldcoastyoga.org/online-appointments",
-     "note": "Schedule sits behind GoDaddy's sign-in booking system — register on their site."},
     {"name": "Seek Yoga", "area": "East Lee St, Pensacola", "platform": "WellnessLiving",
      "booking_url": "https://www.seekyoga.com/seekclasses",
      "note": "Schedule lives in a WellnessLiving widget (signed API) — open their page."},
