@@ -82,6 +82,26 @@ year with a rollover check); rows with class `mz_schedule_table` carry
 [time range, class name, instructor]. If this breaks, check whether their site still embeds the "mz" (healcode/Mindbody)
 widget server-side; if they switch to the JS widget, URU becomes link-only.
 
+### The Gadsden Studio — Arketa widget rendered with a headless browser
+Pilates studio, 1300 E Gadsden St. Booking is an **Arketa** (Sutra) React SPA:
+`gadsdenstudio.com/class-schedule` just embeds an iframe
+(`app.arketa.co/iframe/thegadsdenstudio/schedule`) that pulls classes from Firebase
+*after* load — the raw HTML has no class data, and the data arrives over Firestore's
+realtime channel via the Firebase SDK with anonymous auth (no plain JSON GET to
+replicate; the documented Arketa Partner API needs the studio's own key). So
+`gadsden()` renders the iframe URL with **Playwright/Chromium**, clicks "Show More"
+until the loaded day headers reach END, then reads the DOM: each day is a
+`.card-list__card-group` (an `<h5>` header like "Monday, Jul 6" — no year, infer
+with a rollover guard) holding `.card-body` cards whose innerText lines are
+`[time, name, instructor, location, "View Details", action]`. Times are already
+studio-local (Central). Extraction runs in-page via `GADSDEN_EXTRACT_JS`.
+Needs `playwright` + `playwright install chromium` (the refresh workflow does
+`playwright install --with-deps chromium`). If it breaks, first check whether the
+`.card-list__card-group` / `.card-body` / `<h5>` classes still exist (re-inspect
+the live widget) or whether the "Show More" button text changed; if Arketa fully
+locks it down, demote back to link-only. Most fragile scraper in the set — but a
+per-studio failure only yields an error card, it won't fail the run.
+
 ### Emerald Coast Yoga — recurring schedule parsed from prose
 Their live calendar/booking (GoDaddy Websites+Marketing) is JS-rendered behind a
 lazy-loaded widget with no reachable public API. Instead, `emerald_coast()` parses
@@ -99,17 +119,6 @@ changes and parsing yields odd results, demote ECY to a link-only card.
   (`/api/v2/locations`, `/api/v2/disciplines`, `/api/v2/treatments`) but it's
   appointment *openings*, not a class timetable; their group classes actually run
   inside Lovelock's Momence schedule. Card links out instead.
-- **The Gadsden Studio** (pilates) — 1300 E Gadsden St. Booking is an **Arketa**
-  (Sutra) React SPA embedded client-side (iframe
-  `app.arketa.co/iframe/thegadsdenstudio/schedule`). No server-rendered HTML and
-  no public GET feed: the public schedule reads the Firestore `classes` collection
-  directly via the Firebase JS SDK (project `sutra-prod`, anonymous auth), and
-  Arketa's documented Partner API (`us-central1-sutra-prod.cloudfunctions.net/partnerApi/v0`,
-  `GET /{partnerId}/classes`) requires the studio's own API key. Reverse-engineering
-  the anon-auth Firestore query would be brittle (same call we made for Seek Yoga),
-  so it's link-only. To make it live later: get an Arketa Partner API key from the
-  studio, or capture the widget's live XHR (`widget-api-tkaeguucxq-uc.a.run.app`) in
-  a real browser.
 - **Pure Pilates** (pilates; Downtown 426 S Palafox + Gulf Breeze 221 Gulf Breeze
   Pkwy) — **WellnessLiving** (business `k_business=252337`), the same platform as
   Seek Yoga: JS-only widget, no server-rendered schedule, signed API. Link-only for

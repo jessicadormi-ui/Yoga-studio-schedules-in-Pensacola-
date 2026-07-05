@@ -12,9 +12,12 @@ Studios & platforms:
   - Emerald Coast Yoga .......... recurring schedule parsed from their site
   - Wild Lemon Pilates (Scott St / 12th Ave / Gulf Breeze) . Momence, one
     host (42021) split by session `location`
+  - The Gadsden Studio ........... Arketa widget rendered with Playwright
 Link-only (no scraper — see CLAUDE.md for why):
   - Seek Yoga (WellnessLiving), ChiroYoga (Jane App),
-    The Gadsden Studio (Arketa/Firebase), Pure Pilates (WellnessLiving)
+    Pure Pilates (WellnessLiving)
+
+Deps: requests, beautifulsoup4, playwright (+ `playwright install chromium`).
 """
 import json
 import re
@@ -336,6 +339,89 @@ def zenplanner(subdomain):
     return out
 
 
+GADSDEN_HDR_RE = re.compile(r"^\w+, ([A-Z][a-z]{2}) (\d{1,2})$")
+GADSDEN_TIME_RE = re.compile(r"^(\d{1,2}):(\d{2}) (AM|PM)")
+# Extracts one row per class card from the rendered Arketa widget. Each day is a
+# `.card-list__card-group` (an <h5> date header + its `.card-body` cards); each
+# card's innerText is [time, name, instructor, location, "View Details", action].
+GADSDEN_EXTRACT_JS = r"""
+() => {
+  const out = [];
+  document.querySelectorAll('.card-list__card-group').forEach(group => {
+    const h = group.querySelector('h5');
+    const header = h ? h.textContent.trim() : '';
+    group.querySelectorAll('.card-body').forEach(card => {
+      const lines = card.innerText.split('\n').map(s => s.trim()).filter(Boolean);
+      let instructor = lines[2] || '';
+      if (/Gadsden Studio|Pensacola|room/i.test(instructor)) instructor = '';
+      out.push({header, time: lines[0] || '', name: lines[1] || '', instructor});
+    });
+  });
+  return out;
+}
+"""
+
+
+def _gadsden_date(header):
+    """'Monday, Jul 6' -> date, inferring the year with a rollover guard."""
+    m = GADSDEN_HDR_RE.match(header)
+    if not m:
+        return None
+    d = dt.datetime.strptime(f"{m.group(1)} {m.group(2)} {TODAY.year}", "%b %d %Y").date()
+    if d < TODAY - dt.timedelta(days=180):  # year rollover (Dec -> Jan)
+        d = d.replace(year=d.year + 1)
+    return d
+
+
+def gadsden():
+    """Scrape The Gadsden Studio's Arketa widget with a headless browser.
+
+    Arketa is a React app that pulls classes from Firebase after load — there's no
+    server-rendered HTML or public JSON feed (see CLAUDE.md), so we render the page
+    with Playwright/Chromium, click "Show More" until the window is covered, then
+    read the class cards out of the DOM. Times are already studio-local (Central).
+    Needs `playwright` + a chromium install (handled in the refresh workflow).
+    """
+    from playwright.sync_api import sync_playwright
+    url = "https://app.arketa.co/iframe/thegadsdenstudio/schedule"
+    rows = []
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        try:
+            page = browser.new_page(user_agent=UA["User-Agent"])
+            page.goto(url, timeout=60000)
+            page.wait_for_selector(".card-list__card-group", timeout=30000)
+            # "Show More" lazy-loads further days; click until END is covered.
+            for _ in range(12):
+                headers = page.evaluate(
+                    "() => [...document.querySelectorAll('.card-list__card-group h5')]"
+                    ".map(h => h.textContent.trim())")
+                dates = [d for d in (_gadsden_date(h) for h in headers) if d]
+                if dates and max(dates) >= END:
+                    break
+                btn = page.query_selector("xpath=//*[self::button or self::a or "
+                                          "@role='button'][contains(translate(normalize-space(.),"
+                                          "'SHOWMRE','showmre'),'show more')]")
+                if not btn:
+                    break
+                btn.click()
+                page.wait_for_timeout(1200)
+            rows = page.evaluate(GADSDEN_EXTRACT_JS)
+        finally:
+            browser.close()
+    out = []
+    for r in rows:
+        d = _gadsden_date(r.get("header", ""))
+        tm = GADSDEN_TIME_RE.match((r.get("time") or "").strip())
+        if not d or not tm or not (START <= d <= END):
+            continue
+        hour = int(tm.group(1)) % 12 + (12 if tm.group(3) == "PM" else 0)
+        out.append({"date": str(d), "time": f"{hour:02d}:{tm.group(2)}",
+                    "name": (r.get("name") or "").strip(),
+                    "instructor": (r.get("instructor") or "").strip()})
+    return out
+
+
 STUDIOS = [
     {"name": "Lovelock Healing Arts", "area": "Downtown Pensacola",
      "platform": "Momence", "color": "#B76E79", "discipline": "yoga",
@@ -386,6 +472,10 @@ STUDIOS = [
      "booking_url": "https://momence.com/u/wild-lemon-qXgxVr",
      "fetch": lambda: momence("wild-lemon-qXgxVr", 42021,
                               location_filter="Gulf Breeze", strip_prefix=True)},
+    {"name": "The Gadsden Studio", "area": "1300 E Gadsden St, Pensacola",
+     "platform": "Arketa", "color": "#C0504E", "discipline": "pilates",
+     "booking_url": "https://www.gadsdenstudio.com/class-schedule",
+     "fetch": gadsden},
 ]
 
 LINK_ONLY = [
@@ -399,11 +489,6 @@ LINK_ONLY = [
      "note": "Appointment slots rather than a class timetable — book on Jane."},
     # Pilates studios whose schedules aren't reachable via a public feed (see
     # CLAUDE.md) — surfaced as link-only cards rather than grid pills.
-    {"name": "The Gadsden Studio", "area": "1300 E Gadsden St, Pensacola",
-     "platform": "Arketa", "discipline": "pilates",
-     "booking_url": "https://www.gadsdenstudio.com/class-schedule",
-     "note": "Reformer Pilates. Schedule is an Arketa widget (React app over Firebase) "
-             "with no public feed — open their page to book."},
     {"name": "Pure Pilates — Downtown", "area": "426 S Palafox St, Pensacola",
      "platform": "WellnessLiving", "discipline": "pilates",
      "booking_url": "https://www.purepilatespensacola.com/schedule",
