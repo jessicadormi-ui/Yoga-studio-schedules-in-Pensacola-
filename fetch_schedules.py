@@ -342,19 +342,26 @@ def zenplanner(subdomain):
 GADSDEN_HDR_RE = re.compile(r"^\w+, ([A-Z][a-z]{2}) (\d{1,2})$")
 GADSDEN_TIME_RE = re.compile(r"^(\d{1,2}):(\d{2}) (AM|PM)")
 # Extracts one row per class card from the rendered Arketa widget. Each day is a
-# `.card-list__card-group` (an <h5> date header + its `.card-body` cards); each
-# card's innerText is [time, name, instructor, location, "View Details", action].
+# `.card-list__card-group` (an <h5> date header + its `.card-body` cards). A card's
+# lines are [time, name, instructor, location, "View Details", action], but when
+# the browser's timezone differs from the studio's the widget prints a SECOND time
+# line (viewer-tz), so we don't parse by position: the time is the first clock-time
+# line, and name/instructor are the first two lines that aren't a time, the
+# location, or an action button. (We also pin the browser to Central below, which
+# collapses it to a single time line — belt and suspenders.)
 GADSDEN_EXTRACT_JS = r"""
 () => {
+  const isTime = l => /\d{1,2}:\d{2}\s*(AM|PM)/i.test(l);
+  const isNoise = l => /View Details|Sign Up|Waitlist|Join|Gadsden Studio|Pensacola|room/i.test(l);
   const out = [];
   document.querySelectorAll('.card-list__card-group').forEach(group => {
     const h = group.querySelector('h5');
     const header = h ? h.textContent.trim() : '';
     group.querySelectorAll('.card-body').forEach(card => {
       const lines = card.innerText.split('\n').map(s => s.trim()).filter(Boolean);
-      let instructor = lines[2] || '';
-      if (/Gadsden Studio|Pensacola|room/i.test(instructor)) instructor = '';
-      out.push({header, time: lines[0] || '', name: lines[1] || '', instructor});
+      const time = lines.find(isTime) || '';
+      const rest = lines.filter(l => !isTime(l) && !isNoise(l));
+      out.push({header, time, name: rest[0] || '', instructor: rest[1] || ''});
     });
   });
   return out;
@@ -388,7 +395,11 @@ def gadsden():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         try:
-            page = browser.new_page(user_agent=UA["User-Agent"])
+            # Pin to Central so the widget prints studio-local times (the runner is
+            # UTC; without this the times render in GMT).
+            context = browser.new_context(user_agent=UA["User-Agent"],
+                                          timezone_id="America/Chicago", locale="en-US")
+            page = context.new_page()
             page.goto(url, timeout=60000)
             page.wait_for_selector(".card-list__card-group", timeout=30000)
             # "Show More" lazy-loads further days; click until END is covered.
