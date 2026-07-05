@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-07-04T16:11-05:00",
- "week_start": "2026-07-04",
- "week_end": "2026-07-10",
+ "generated_at": "2026-07-05T10:47-05:00",
+ "week_start": "2026-07-05",
+ "week_end": "2026-07-11",
  "timezone": "America/Chicago",
  "studios": [
   {
@@ -208,6 +208,24 @@
      "time": "11:00",
      "name": "11AM YOGA: Sculpt",
      "instructor": "Aniese  Jura"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "08:00",
+     "name": "8AM Yoga Sculpt: Ibiza House",
+     "instructor": "Marina Hale"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "09:45",
+     "name": "9:45AM KIDS: Mindful Play",
+     "instructor": "Ashlin  Kerr"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "10:00",
+     "name": "10AM YOGA: Mama Flow",
+     "instructor": "Tiara Trevino"
     }
    ],
    "error": null
@@ -290,6 +308,12 @@
      "time": "08:00",
      "name": "Yin Yoga",
      "instructor": "Sydney  Geci"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "08:00",
+     "name": "Vinyasa",
+     "instructor": "Shahana  Hanley"
     }
    ],
    "error": null
@@ -301,24 +325,6 @@
    "color": "#7C6BC4",
    "booking_url": "https://app.fitdegree.com/t/dashboard/fitspot/74",
    "classes": [
-    {
-     "date": "2026-07-04",
-     "time": "08:15",
-     "name": "Disko Hot Pilates 50 \ud83d\udd25",
-     "instructor": "Danni M"
-    },
-    {
-     "date": "2026-07-04",
-     "time": "09:30",
-     "name": "Disko Flow 60 \ud83d\udd25",
-     "instructor": "Jason D"
-    },
-    {
-     "date": "2026-07-04",
-     "time": "11:00",
-     "name": "Flow Into Yin 60 \ud83d\udd25",
-     "instructor": "Katie R"
-    },
     {
      "date": "2026-07-05",
      "time": "08:15",
@@ -450,6 +456,24 @@
      "time": "16:30",
      "name": "Disko Yoga Sculpt 45\ud83d\udd25",
      "instructor": "Danni M"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "08:15",
+     "name": "Disko Hot Pilates 50 \ud83d\udd25",
+     "instructor": "Danni M"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "09:30",
+     "name": "Disko Flow 60 \ud83d\udd25",
+     "instructor": "Jason D"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "11:00",
+     "name": "Flow Into Yin 60 \ud83d\udd25",
+     "instructor": "Klau Hunt"
     }
    ],
    "error": null
@@ -461,24 +485,6 @@
    "color": "#3E7CB1",
    "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
    "classes": [
-    {
-     "date": "2026-07-04",
-     "time": "09:30",
-     "name": "HOT Vinyasa Flow Yoga",
-     "instructor": "Vananh Vu"
-    },
-    {
-     "date": "2026-07-04",
-     "time": "11:00",
-     "name": "Songbird Gentle Yoga Flow",
-     "instructor": "Lynn Ball Jackson"
-    },
-    {
-     "date": "2026-07-05",
-     "time": "09:00",
-     "name": "HOT Yoga Caliente",
-     "instructor": "Karen Elmore"
-    },
     {
      "date": "2026-07-05",
      "time": "15:30",
@@ -700,6 +706,36 @@
      "time": "17:30",
      "name": "HOT Heart Opening Yoga Flow",
      "instructor": "Alexandra Amaya"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "09:30",
+     "name": "HOT Vinyasa Flow Yoga",
+     "instructor": "Julie Graham"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "09:30",
+     "name": "Mindful Movement: Strength and Mobility Flow",
+     "instructor": "Allison Plantz"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "11:00",
+     "name": "Songbird Gentle Yoga Flow",
+     "instructor": "Lynn Ball Jackson"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "11:30",
+     "name": "INTENSE WARM Yoga & Mobility (Experienced Yogis)",
+     "instructor": "Vananh Vu"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "16:00",
+     "name": "HOT Yoga Remix",
+     "instructor": "Lora Guy"
     }
    ],
    "error": null
@@ -781,12 +817,6 @@
    "color": "#28527A",
    "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
    "classes": [
-    {
-     "date": "2026-07-04",
-     "time": "07:00",
-     "name": "HOT Invigorating Morning Yoga Flow",
-     "instructor": "NIkete Finley"
-    },
     {
      "date": "2026-07-05",
      "time": "09:30",
@@ -888,6 +918,18 @@
      "time": "18:00",
      "name": "Somatic Yoga, Breathe & Beyond",
      "instructor": "Emina Halimovic"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "07:00",
+     "name": "HOT Invigorating Morning Yoga Flow",
+     "instructor": "Julie Graham"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "09:30",
+     "name": "Warm Prana Power Flow",
+     "instructor": "Lisa Breitenwischer"
     }
    ],
    "error": null
@@ -899,12 +941,6 @@
    "color": "#4CA6A8",
    "booking_url": "https://emeraldcoastyoga.org/online-appointments",
    "classes": [
-    {
-     "date": "2026-07-04",
-     "time": "08:00",
-     "name": "Dance Trance",
-     "instructor": ""
-    },
     {
      "date": "2026-07-05",
      "time": "10:30",
@@ -975,6 +1011,12 @@
      "date": "2026-07-10",
      "time": "12:00",
      "name": "Friday Noon Seated Meditation",
+     "instructor": ""
+    },
+    {
+     "date": "2026-07-11",
+     "time": "08:00",
+     "name": "Dance Trance",
      "instructor": ""
     }
    ],
@@ -1058,6 +1100,12 @@
      "time": "06:15",
      "name": "Slow Power",
      "instructor": "Todd Timmons"
+    },
+    {
+     "date": "2026-07-11",
+     "time": "09:00",
+     "name": "Slow-Core Power",
+     "instructor": "Andy Feltovich"
     }
    ],
    "error": null
