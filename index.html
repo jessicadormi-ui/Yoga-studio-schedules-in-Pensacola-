@@ -27,6 +27,11 @@
   .meta{color:var(--mute);font-size:13px;display:flex;gap:14px;flex-wrap:wrap}
   .meta code{font-family:"Spline Sans Mono",monospace;font-size:12px}
 
+  /* class-type filter row */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0 2px}
+  .filters .flabel{font-size:12px;color:var(--mute);text-transform:uppercase;
+                   letter-spacing:.06em;font-weight:600;margin-right:2px}
+
   /* studio filter pills */
   .pills{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 6px}
   .pill{border:1.5px solid var(--dot,var(--mute));border-radius:999px;background:var(--card);
@@ -65,6 +70,9 @@
         padding:12px 16px;text-decoration:none;max-width:340px}
   .card .n{font-weight:600}
   .card .p{font-size:12px;color:var(--mute);margin-top:2px}
+  .tag{display:inline-block;font-size:11px;font-weight:600;vertical-align:middle;
+       border:1px solid var(--dot);color:var(--dot);border-radius:999px;
+       padding:1px 8px;margin-left:6px}
 
   .error{background:#FBEFE9;border:1px solid #E8C9B8;border-radius:10px;
          padding:10px 14px;font-size:13px;margin-top:14px}
@@ -86,6 +94,7 @@
       <span id="stamp"></span>
       <span>All times Central</span>
     </div>
+    <div class="filters" id="discfilter" role="group" aria-label="Filter by class type"></div>
     <div class="pills" id="pills" role="group" aria-label="Show or hide studios"></div>
   </header>
 
@@ -101,7 +110,10 @@
 
 <script>
 const grid = document.getElementById('grid');
-const state = { hidden: new Set() };
+const state = { hidden: new Set(), hiddenDisc: new Set() };
+const DISC_COLOR = { yoga:'#6FA8A0', pilates:'#F2A65A', other:'#8A94A6' };
+const DISC_ORDER = ['yoga','pilates','other'];
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
 
 function fmtTime(hm){
   const [h,m] = hm.split(':').map(Number);
@@ -127,6 +139,28 @@ function render(data){
   document.getElementById('stamp').textContent =
     'Updated ' + new Date(data.generated_at).toLocaleString('en-US',
       {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+
+  // class-type (discipline) filter — only shown when >1 discipline is present
+  const dwrap = document.getElementById('discfilter');
+  const present = new Set(data.studios.flatMap(s=>s.classes.map(c=>c.discipline)));
+  const discs = DISC_ORDER.filter(d=>present.has(d));
+  dwrap.innerHTML = '';
+  if (discs.length > 1){
+    const lab = document.createElement('span');
+    lab.className = 'flabel'; lab.textContent = 'Class type';
+    dwrap.appendChild(lab);
+    discs.forEach(d=>{
+      const b = document.createElement('button');
+      b.className = 'pill' + (state.hiddenDisc.has(d) ? ' off' : '');
+      b.style.setProperty('--dot', DISC_COLOR[d] || DISC_COLOR.other);
+      b.setAttribute('aria-pressed', !state.hiddenDisc.has(d));
+      b.innerHTML = `<span class="dot"></span>${cap(d)}`;
+      b.onclick = ()=>{ state.hiddenDisc.has(d) ? state.hiddenDisc.delete(d)
+                                                : state.hiddenDisc.add(d);
+                        render(data); };
+      dwrap.appendChild(b);
+    });
+  }
 
   // filter pills
   const pills = document.getElementById('pills');
@@ -154,7 +188,8 @@ function render(data){
     const items = [];
     data.studios.forEach(s=>{
       if (state.hidden.has(s.name)) return;
-      s.classes.filter(c=>c.date===iso).forEach(c=>items.push({...c, studio:s}));
+      s.classes.filter(c=>c.date===iso && !state.hiddenDisc.has(c.discipline))
+               .forEach(c=>items.push({...c, studio:s}));
     });
     items.sort((a,b)=>a.time.localeCompare(b.time));
     if (!items.length){
@@ -183,16 +218,19 @@ function render(data){
      <a href="${s.booking_url}" target="_blank" rel="noopener">check their schedule directly</a>.</div>`
   ).join('');
 
-  // link-only studios
-  if (data.link_only?.length){
-    document.getElementById('also').hidden = false;
-    document.getElementById('cards').innerHTML = data.link_only.map(s=>
-      `<a class="card" href="${s.booking_url}" target="_blank" rel="noopener">
-        <div class="n">${s.name}</div>
+  // link-only studios (hidden if their discipline is filtered out)
+  const linkOnly = (data.link_only || []).filter(s=>!state.hiddenDisc.has(s.discipline));
+  document.getElementById('also').hidden = !linkOnly.length;
+  document.getElementById('cards').innerHTML = linkOnly.map(s=>{
+    const tag = s.discipline
+      ? ` <span class="tag" style="--dot:${DISC_COLOR[s.discipline]||DISC_COLOR.other}">${cap(s.discipline)}</span>`
+      : '';
+    return `<a class="card" href="${s.booking_url}" target="_blank" rel="noopener">
+        <div class="n">${s.name}${tag}</div>
         <div class="p">${s.platform} · ${s.area}</div>
         <div class="p">${s.note}</div>
-      </a>`).join('');
-  }
+      </a>`;
+  }).join('');
 }
 
 fetch('schedule.json')

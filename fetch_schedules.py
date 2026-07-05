@@ -2,13 +2,19 @@
 """Fetch weekly class schedules from Pensacola yoga studios into schedule.json.
 
 Covers a rolling 7-day window starting today (America/Chicago).
+Each class is tagged with a discipline (yoga / pilates / other).
 Studios & platforms:
   - Lovelock Healing Arts ........ Momence (public readonly API)
   - Golden Hour Yoga & Tea House . Momence (public readonly API)
   - Disko Lemonade Yoga .......... fitDEGREE (public API)
   - Florida Power Yoga ........... Zen Planner (HTML list view)
+  - URU (Airport/Nine Mile/Gulf Breeze) . Mindbody via uruyoga.com HTML
+  - Emerald Coast Yoga .......... recurring schedule parsed from their site
+  - Wild Lemon Pilates (Scott St / 12th Ave / Gulf Breeze) . Momence, one
+    host (42021) split by session `location`
 Link-only (no scraper — see CLAUDE.md for why):
-  - Seek Yoga (WellnessLiving), ChiroYoga (Jane App)
+  - Seek Yoga (WellnessLiving), ChiroYoga (Jane App),
+    The Gadsden Studio (Arketa/Firebase), Pure Pilates (WellnessLiving)
 """
 import json
 import re
@@ -28,8 +34,38 @@ END = TODAY + dt.timedelta(days=6)
 MOMENCE_API = "https://readonly-api.momence.com"
 
 
-def momence(slug, fallback_host_id=None):
-    """Return normalized classes for a Momence host, resolving hostId from slug."""
+# --- discipline classification --------------------------------------------
+# Tag each class as "pilates", "yoga", or "other". Keywords are only the
+# UNAMBIGUOUS signals for a discipline; ambiguous words that exist in both
+# worlds (flow, sculpt, power, barre, tower...) are deliberately left out so
+# they fall through to the studio's own default discipline. Pilates terms are
+# checked first (a "Reformer Flow" is pilates, not yoga). Net effect: a genuine
+# yoga class at a pilates studio is still tagged yoga, but anything the name
+# doesn't clearly mark is assumed to be the studio's default discipline.
+PILATES_KW = ("pilates", "reformer", "megaformer", "lagree", "cadillac",
+              "jumpboard", "springboard", "mat pilates")
+YOGA_KW = ("yoga", "vinyasa", "hatha", "yin", "ashtanga", "kundalini",
+           "namaste", "asana", "mysore", "nidra", "restorative", "buti")
+
+
+def classify_discipline(name, default="other"):
+    """Classify a class name as pilates/yoga/other, falling back to `default`."""
+    n = (name or "").lower()
+    if any(k in n for k in PILATES_KW):
+        return "pilates"
+    if any(k in n for k in YOGA_KW):
+        return "yoga"
+    return default
+
+
+def momence(slug, fallback_host_id=None, location_filter=None, strip_prefix=False):
+    """Return normalized classes for a Momence host, resolving hostId from slug.
+
+    A single Momence host can span several physical locations (e.g. Wild Lemon's
+    three studios share one feed). `location_filter` keeps only sessions whose
+    `location` contains that substring; `strip_prefix` drops a leading
+    "Location • " marker from the class name so the pill isn't redundant.
+    """
     host_id = fallback_host_id
     try:
         r = requests.get(f"{MOMENCE_API}/schedule/GetLatestStandalone",
@@ -53,15 +89,19 @@ def momence(slug, fallback_host_id=None):
         starts = s.get("startsAt")
         if not starts or s.get("isCancelled"):
             continue
+        if location_filter and location_filter.lower() not in (s.get("location") or "").lower():
+            continue
         local = dt.datetime.fromisoformat(starts.replace("Z", "+00:00")).astimezone(TZ)
         if not (START <= local.date() <= END):
             continue
         t = s.get("teacher")  # plain string, e.g. "Marina Hale"
         if isinstance(t, dict):
             t = " ".join(x for x in [t.get("firstName"), t.get("lastName")] if x)
+        name = (s.get("sessionName") or "").strip()
+        if strip_prefix and "•" in name:
+            name = name.split("•", 1)[1].strip()
         out.append({"date": str(local.date()), "time": local.strftime("%H:%M"),
-                    "name": (s.get("sessionName") or "").strip(),
-                    "instructor": (t or "").strip()})
+                    "name": name, "instructor": (t or "").strip()})
     return out
 
 
@@ -298,46 +338,80 @@ def zenplanner(subdomain):
 
 STUDIOS = [
     {"name": "Lovelock Healing Arts", "area": "Downtown Pensacola",
-     "platform": "Momence", "color": "#B76E79",
+     "platform": "Momence", "color": "#B76E79", "discipline": "yoga",
      "booking_url": "https://momence.com/u/lovelock-healing-arts-WO7t6K",
      "fetch": lambda: momence("lovelock-healing-arts-WO7t6K", 14136)},
     {"name": "Golden Hour Yoga & Tea House", "area": "East Hill, Pensacola",
-     "platform": "Momence", "color": "#D99A3D",
+     "platform": "Momence", "color": "#D99A3D", "discipline": "yoga",
      "booking_url": "https://momence.com/u/golden-hour-yoga-and-tea-house-qDBgJS",
      "fetch": lambda: momence("golden-hour-yoga-and-tea-house-qDBgJS", 123215)},
     {"name": "Disko Lemonade Yoga", "area": "Downtown Pensacola",
-     "platform": "fitDEGREE", "color": "#7C6BC4",
+     "platform": "fitDEGREE", "color": "#7C6BC4", "discipline": "yoga",
      "booking_url": "https://app.fitdegree.com/t/dashboard/fitspot/74",
      "fetch": lambda: fitdegree(74)},
     {"name": "URU Airport", "area": "Executive Plaza Rd, Pensacola",
-     "platform": "Mindbody (via uruyoga.com)", "color": "#3E7CB1",
+     "platform": "Mindbody (via uruyoga.com)", "color": "#3E7CB1", "discipline": "yoga",
      "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
      "fetch": lambda: uru("uru-one-schedule")},
     {"name": "URU Nine Mile", "area": "Nine Mile Rd, Pensacola",
-     "platform": "Mindbody (via uruyoga.com)", "color": "#79A9D1",
+     "platform": "Mindbody (via uruyoga.com)", "color": "#79A9D1", "discipline": "yoga",
      "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
      "fetch": lambda: uru("uru2-class-schedule")},
     {"name": "URU Gulf Breeze", "area": "Gulf Breeze Pkwy",
-     "platform": "Mindbody (via uruyoga.com)", "color": "#28527A",
+     "platform": "Mindbody (via uruyoga.com)", "color": "#28527A", "discipline": "yoga",
      "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
      "fetch": lambda: uru("uru3-gulf-breeze")},
     {"name": "Emerald Coast Yoga", "area": "East Hill, Pensacola",
-     "platform": "Weekly schedule from their site", "color": "#4CA6A8",
+     "platform": "Weekly schedule from their site", "color": "#4CA6A8", "discipline": "yoga",
      "booking_url": "https://emeraldcoastyoga.org/online-appointments",
      "fetch": emerald_coast},
     {"name": "Florida Power Yoga", "area": "N Davis Hwy, Pensacola",
-     "platform": "Zen Planner", "color": "#4E8F6B",
+     "platform": "Zen Planner", "color": "#4E8F6B", "discipline": "yoga",
      "booking_url": "https://floridapoweryogapensacola.sites.zenplanner.com/calendar.cfm",
      "fetch": lambda: zenplanner("floridapoweryogapensacola")},
+    # Wild Lemon Pilates — one Momence host (42021) spanning three studios;
+    # split by the per-session `location` string (see CLAUDE.md).
+    {"name": "Wild Lemon — Scott St", "area": "904 E Scott St, Pensacola",
+     "platform": "Momence", "color": "#E4C41A", "discipline": "pilates",
+     "booking_url": "https://momence.com/u/wild-lemon-qXgxVr",
+     "fetch": lambda: momence("wild-lemon-qXgxVr", 42021,
+                              location_filter="Scott St", strip_prefix=True)},
+    {"name": "Wild Lemon — 12th Ave", "area": "3000 N 12th Ave, Pensacola",
+     "platform": "Momence", "color": "#8FB339", "discipline": "pilates",
+     "booking_url": "https://momence.com/u/wild-lemon-qXgxVr",
+     "fetch": lambda: momence("wild-lemon-qXgxVr", 42021,
+                              location_filter="12th Ave", strip_prefix=True)},
+    {"name": "Wild Lemon — Gulf Breeze", "area": "913 Gulf Breeze Pkwy, Gulf Breeze",
+     "platform": "Momence", "color": "#C77D34", "discipline": "pilates",
+     "booking_url": "https://momence.com/u/wild-lemon-qXgxVr",
+     "fetch": lambda: momence("wild-lemon-qXgxVr", 42021,
+                              location_filter="Gulf Breeze", strip_prefix=True)},
 ]
 
 LINK_ONLY = [
     {"name": "Seek Yoga", "area": "East Lee St, Pensacola", "platform": "WellnessLiving",
+     "discipline": "yoga",
      "booking_url": "https://www.seekyoga.com/seekclasses",
      "note": "Schedule lives in a WellnessLiving widget (signed API) — open their page."},
     {"name": "ChiroYoga Wellness Clinic", "area": "Pensacola Beach", "platform": "Jane App",
+     "discipline": "yoga",
      "booking_url": "https://chiroyoga.janeapp.com",
      "note": "Appointment slots rather than a class timetable — book on Jane."},
+    # Pilates studios whose schedules aren't reachable via a public feed (see
+    # CLAUDE.md) — surfaced as link-only cards rather than grid pills.
+    {"name": "The Gadsden Studio", "area": "1300 E Gadsden St, Pensacola",
+     "platform": "Arketa", "discipline": "pilates",
+     "booking_url": "https://www.gadsdenstudio.com/class-schedule",
+     "note": "Reformer Pilates. Schedule is an Arketa widget (React app over Firebase) "
+             "with no public feed — open their page to book."},
+    {"name": "Pure Pilates — Downtown", "area": "426 S Palafox St, Pensacola",
+     "platform": "WellnessLiving", "discipline": "pilates",
+     "booking_url": "https://www.purepilatespensacola.com/schedule",
+     "note": "Pilates & GYROTONIC. WellnessLiving widget (signed API) — schedule on their site."},
+    {"name": "Pure Pilates — Gulf Breeze", "area": "221 Gulf Breeze Pkwy, Gulf Breeze",
+     "platform": "WellnessLiving", "discipline": "pilates",
+     "booking_url": "https://www.purepilatespensacola.com/schedule",
+     "note": "Pilates & GYROTONIC. WellnessLiving widget (signed API) — schedule on their site."},
 ]
 
 
@@ -348,9 +422,12 @@ def main():
     failures = 0
     for s in STUDIOS:
         print(f"Fetching {s['name']} ({s['platform']}) ...")
-        entry = {k: s[k] for k in ("name", "area", "platform", "color", "booking_url")}
+        entry = {k: s[k] for k in
+                 ("name", "area", "platform", "color", "booking_url", "discipline")}
         try:
             classes = sorted(s["fetch"](), key=lambda c: (c["date"], c["time"]))
+            for c in classes:
+                c["discipline"] = classify_discipline(c["name"], s["discipline"])
             entry["classes"] = classes
             entry["error"] = None
             print(f"  ok: {len(classes)} classes")

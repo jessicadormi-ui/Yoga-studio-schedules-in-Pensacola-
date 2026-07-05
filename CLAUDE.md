@@ -1,7 +1,21 @@
 # Gulf Coast Yoga Week — project notes for Claude Code
 
-A static dashboard showing this week's classes across Pensacola-area yoga studios.
-Built and verified on 2026-07-04 (all four scrapers returned live data: 82 classes).
+A static dashboard showing this week's classes across Pensacola-area yoga and
+pilates studios.
+Built and verified on 2026-07-04 (yoga scrapers returned live data: 82 classes);
+Wild Lemon Pilates (Momence) added 2026-07-05.
+
+## Discipline tagging
+Every class carries a `discipline` field — `yoga`, `pilates`, or `other` —
+set by `classify_discipline()` in `fetch_schedules.py`. It keyword-matches the
+class name (pilates terms checked first), and only UNAMBIGUOUS words are in the
+keyword lists; ambiguous ones (flow, sculpt, power, barre…) are left out so they
+fall back to the studio's own `discipline` default. Each studio dict therefore
+has a `discipline` key (its default). Net effect: a class named "Reformer" at any
+studio is pilates, "Vinyasa" is yoga, and an unlabeled class inherits the
+studio's default (so everything at a pilates studio reads pilates unless the name
+says otherwise). `index.html` renders a "Class type" filter row (shown only when
+>1 discipline is present) alongside the studio pills.
 
 ## Files
 - `fetch_schedules.py` — pulls a rolling 7-day window into `schedule.json`. No API keys. Deps: `requests`, `beautifulsoup4`.
@@ -26,6 +40,15 @@ Public, unauthenticated, JSON:
 These routes were mined from `https://momence.com/plugin/host-schedule/host-schedule.js`
 and the host-landing bundle at `static.momence.com/host-landing/static/js/main.*.chunk.js` —
 re-mine those bundles if routes 404 someday.
+
+### Momence — Wild Lemon Pilates (host 42021: Scott St / 12th Ave / Gulf Breeze)
+One Momence host serves all three physical studios; the sessions feed carries a
+per-session `location` string. `momence()` takes two optional args for this:
+`location_filter` (keep only sessions whose `location` contains the substring —
+`"Scott St"`, `"12th Ave"`, `"Gulf Breeze"`) and `strip_prefix` (session names are
+prefixed `"Scott St • Reformer"`, so drop everything up to the `•` for a clean
+pill). Slug `wild-lemon-qXgxVr` → hostId 42021. Each location is its own studio
+entry/pill (URU-style: three entries, one source). Verified 2026-07-05.
 
 ### fitDEGREE — Disko Lemonade Yoga (fitspot_id 74)
 Public, unauthenticated:
@@ -76,6 +99,22 @@ changes and parsing yields odd results, demote ECY to a link-only card.
   (`/api/v2/locations`, `/api/v2/disciplines`, `/api/v2/treatments`) but it's
   appointment *openings*, not a class timetable; their group classes actually run
   inside Lovelock's Momence schedule. Card links out instead.
+- **The Gadsden Studio** (pilates) — 1300 E Gadsden St. Booking is an **Arketa**
+  (Sutra) React SPA embedded client-side (iframe
+  `app.arketa.co/iframe/thegadsdenstudio/schedule`). No server-rendered HTML and
+  no public GET feed: the public schedule reads the Firestore `classes` collection
+  directly via the Firebase JS SDK (project `sutra-prod`, anonymous auth), and
+  Arketa's documented Partner API (`us-central1-sutra-prod.cloudfunctions.net/partnerApi/v0`,
+  `GET /{partnerId}/classes`) requires the studio's own API key. Reverse-engineering
+  the anon-auth Firestore query would be brittle (same call we made for Seek Yoga),
+  so it's link-only. To make it live later: get an Arketa Partner API key from the
+  studio, or capture the widget's live XHR (`widget-api-tkaeguucxq-uc.a.run.app`) in
+  a real browser.
+- **Pure Pilates** (pilates; Downtown 426 S Palafox + Gulf Breeze 221 Gulf Breeze
+  Pkwy) — **WellnessLiving** (business `k_business=252337`), the same platform as
+  Seek Yoga: JS-only widget, no server-rendered schedule, signed API. Link-only for
+  the same reason. NOTE: only **two** real locations exist — the "third" seen in
+  WellnessLiving's directory is an auto-generated duplicate stub, not a studio.
 
 ## Other context worth knowing
 - All studios are in **America/Chicago**; the page renders local times and says so.
