@@ -1,0 +1,23 @@
+name: Refresh schedules
+on:
+  schedule:
+    - cron: "0 11 * * *"   # 6:00am Central, daily
+  workflow_dispatch:        # manual "Run workflow" button
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install requests beautifulsoup4
+      - run: python fetch_schedules.py
+      - name: Commit if changed
+        run: |
+          git config user.name "schedule-bot"
+          git config user.email "actions@github.com"
+          git add schedule.json
+          git diff --cached --quiet || git commit -m "Refresh schedules $(date -u +%F)"
+          git push
