@@ -32,14 +32,39 @@
   .filters .flabel{font-size:12px;color:var(--mute);text-transform:uppercase;
                    letter-spacing:.06em;font-weight:600;margin-right:2px}
 
-  /* studio filter pills */
-  .pills{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 6px}
+  /* class-type pills (used by the discipline filter) */
   .pill{border:1.5px solid var(--dot,var(--mute));border-radius:999px;background:var(--card);
         padding:6px 14px 6px 10px;font-size:13px;font-weight:600;cursor:pointer;
         display:inline-flex;align-items:center;gap:7px;color:var(--ink)}
   .pill .dot{width:10px;height:10px;border-radius:50%;background:var(--dot)}
   .pill.off{opacity:.35;border-color:var(--line)}
   .pill:focus-visible{outline:3px solid var(--glass);outline-offset:2px}
+
+  /* studio dropdown */
+  .studios{position:relative;margin:18px 0 6px}
+  .studio-toggle{border:1.5px solid var(--line);border-radius:10px;background:var(--card);
+        padding:8px 14px;font:inherit;font-size:14px;font-weight:600;color:var(--ink);
+        cursor:pointer;display:inline-flex;align-items:center;gap:10px}
+  .studio-toggle .caret{color:var(--mute);font-size:11px}
+  .studio-toggle:focus-visible{outline:3px solid var(--glass);outline-offset:2px}
+  .studio-panel{position:absolute;z-index:20;margin-top:6px;background:var(--card);
+        border:1px solid var(--line);border-radius:12px;padding:10px;min-width:262px;
+        max-width:calc(100vw - 40px);max-height:60vh;overflow:auto;
+        box-shadow:0 12px 34px rgba(34,49,58,.16)}
+  .studio-actions{display:flex;gap:8px;padding:0 2px 8px;margin-bottom:6px;
+        border-bottom:1px solid var(--line)}
+  .studio-actions button{flex:1;border:1px solid var(--line);border-radius:8px;
+        background:var(--sea);padding:6px 8px;font:inherit;font-size:12px;font-weight:600;
+        color:var(--ink);cursor:pointer}
+  .studio-actions button:hover{border-color:var(--glass)}
+  .studio-option{display:flex;align-items:center;gap:9px;padding:6px;border-radius:8px;
+        cursor:pointer;font-size:14px;line-height:1.2}
+  .studio-option:hover{background:var(--sea)}
+  .studio-option input{width:16px;height:16px;accent-color:var(--glass);cursor:pointer;margin:0;flex:none}
+  .studio-option .dot{width:10px;height:10px;border-radius:50%;flex:none}
+  .studio-option.disabled{opacity:.4;cursor:default}
+  .studio-option.disabled:hover{background:transparent}
+  .studio-option.disabled input{cursor:default}
 
   /* week grid */
   .grid{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:16px}
@@ -95,7 +120,7 @@
       <span>All times Central</span>
     </div>
     <div class="filters" id="discfilter" role="group" aria-label="Filter by class type"></div>
-    <div class="pills" id="pills" role="group" aria-label="Show or hide studios"></div>
+    <div class="studios" id="studioFilter"></div>
   </header>
 
   <main>
@@ -114,6 +139,89 @@ const state = { hidden: new Set(), hiddenDisc: new Set() };
 const DISC_COLOR = { yoga:'#6FA8A0', pilates:'#F2A65A', other:'#8A94A6' };
 const DISC_ORDER = ['yoga','pilates','other'];
 const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+// Studio dropdown: built once, then updated in place so it stays open while you
+// check several boxes. A studio is greyed out when none of its classes fall in
+// the currently-selected class types.
+let studioUI = null;
+function ensureStudioDropdown(data){
+  if (studioUI) return;
+  const wrap = document.getElementById('studioFilter');
+  const toggle = document.createElement('button');
+  toggle.type = 'button';
+  toggle.className = 'studio-toggle';
+  toggle.setAttribute('aria-haspopup', 'true');
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.innerHTML = '<span class="stxt"></span><span class="caret">▾</span>';
+
+  const panel = document.createElement('div');
+  panel.className = 'studio-panel';
+  panel.hidden = true;
+
+  const actions = document.createElement('div');
+  actions.className = 'studio-actions';
+  const allBtn = document.createElement('button');
+  allBtn.type = 'button'; allBtn.textContent = 'Select all';
+  allBtn.onclick = () => { state.hidden.clear(); render(data); };
+  const noneBtn = document.createElement('button');
+  noneBtn.type = 'button'; noneBtn.textContent = 'Select none';
+  noneBtn.onclick = () => { data.studios.forEach(s => state.hidden.add(s.name)); render(data); };
+  actions.append(allBtn, noneBtn);
+
+  const list = document.createElement('div');
+  list.className = 'studio-list';
+  data.studios.forEach(s => {
+    const label = document.createElement('label');
+    label.className = 'studio-option';
+    label.dataset.studio = s.name;
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.onchange = () => {
+      cb.checked ? state.hidden.delete(s.name) : state.hidden.add(s.name);
+      render(data);
+    };
+    const dot = document.createElement('span');
+    dot.className = 'dot'; dot.style.background = s.color;
+    const nm = document.createElement('span');
+    nm.className = 'sname'; nm.textContent = s.name;
+    label.append(cb, dot, nm);
+    list.appendChild(label);
+  });
+
+  panel.append(actions, list);
+  toggle.onclick = () => {
+    const open = panel.hidden;
+    panel.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+  };
+  document.addEventListener('click', e => {
+    if (!wrap.contains(e.target)) { panel.hidden = true; toggle.setAttribute('aria-expanded','false'); }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { panel.hidden = true; toggle.setAttribute('aria-expanded','false'); }
+  });
+  wrap.append(toggle, panel);
+  studioUI = { toggle, panel, list };
+}
+
+function updateStudioDropdown(data){
+  ensureStudioDropdown(data);
+  const total = data.studios.length;
+  const selected = data.studios.filter(s => !state.hidden.has(s.name)).length;
+  studioUI.toggle.querySelector('.stxt').textContent =
+    selected === total ? `All studios (${total})`
+    : selected === 0 ? 'No studios selected'
+    : `Studios (${selected} of ${total})`;
+  studioUI.list.querySelectorAll('.studio-option').forEach(label => {
+    const s = data.studios.find(x => x.name === label.dataset.studio);
+    const cb = label.querySelector('input');
+    cb.checked = !state.hidden.has(s.name);
+    const applies = s.classes.some(c => !state.hiddenDisc.has(c.discipline));
+    label.classList.toggle('disabled', !applies);
+    cb.disabled = !applies;
+    label.title = applies ? '' : 'No classes in the selected class type(s) this week';
+  });
+}
 
 function fmtTime(hm){
   const [h,m] = hm.split(':').map(Number);
@@ -162,20 +270,8 @@ function render(data){
     });
   }
 
-  // filter pills
-  const pills = document.getElementById('pills');
-  pills.innerHTML = '';
-  data.studios.forEach(s=>{
-    const b = document.createElement('button');
-    b.className = 'pill' + (state.hidden.has(s.name) ? ' off' : '');
-    b.style.setProperty('--dot', s.color);
-    b.setAttribute('aria-pressed', !state.hidden.has(s.name));
-    b.innerHTML = `<span class="dot"></span>${s.name}`;
-    b.onclick = ()=>{ state.hidden.has(s.name) ? state.hidden.delete(s.name)
-                                               : state.hidden.add(s.name);
-                      render(data); };
-    pills.appendChild(b);
-  });
+  // studio dropdown (checkboxes; greys out studios with no applicable classes)
+  updateStudioDropdown(data);
 
   // week columns
   grid.innerHTML = '';
