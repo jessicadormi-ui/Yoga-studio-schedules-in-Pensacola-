@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-06T12:02-05:00",
- "week_start": "2026-10-06",
- "week_end": "2026-10-12",
+ "generated_at": "2026-10-07T12:40-05:00",
+ "week_start": "2026-10-07",
+ "week_end": "2026-10-13",
  "timezone": "America/Chicago",
  "studios": [
   {
@@ -12,55 +12,6 @@
    "booking_url": "https://momence.com/u/lovelock-healing-arts-WO7t6K",
    "discipline": "yoga",
    "classes": [
-    {
-     "date": "2026-10-06",
-     "time": "10:45",
-     "name": "10:45AM KIDS: Mindful Play",
-     "instructor": "Ashlin  Kerr",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "11:00",
-     "name": "11AM UNWIND: Fascial Maneuvers",
-     "instructor": "Daniel Lovelock, LMT",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "17:30",
-     "name": "5:30PM Yoga Sculpt | Latin Beats \ud83d\udc83\ud83c\udffb",
-     "instructor": "Marina Hale",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "19:00",
-     "name": "7PM PILATES: Mat",
-     "instructor": "Courtney Voss",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "07:00",
-     "name": "7AM PILATES: Sculpt",
-     "instructor": "Courtney Voss",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "08:45",
-     "name": "8:45AM KIDS: Mindful Play",
-     "instructor": "Ashlin  Kerr",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "09:00",
-     "name": "9AM YOGA: Gentle Flow",
-     "instructor": "Tiara Trevino",
-     "discipline": "yoga"
-    },
     {
      "date": "2026-10-07",
      "time": "10:45",
@@ -73,13 +24,6 @@
      "time": "11:00",
      "name": "11AM YOGA: Power Flow",
      "instructor": "Tiara Trevino",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "17:30",
-     "name": "5:30PM YOGA: Vinyasa (Student/Military Night)",
-     "instructor": "Rod Camp",
      "discipline": "yoga"
     },
     {
@@ -256,6 +200,55 @@
      "name": "7PM UNWIND: Fascial Maneuvers",
      "instructor": "Daniel Lovelock, LMT",
      "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "07:00",
+     "name": "7AM YOGA: Sculpt",
+     "instructor": "Nicole Henshaw",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "08:45",
+     "name": "8:45AM KIDS: Mindful Play",
+     "instructor": "Ashlin  Kerr",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "09:00",
+     "name": "9AM PILATES: Sculpt",
+     "instructor": "Aniese  Jura",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "10:45",
+     "name": "10:45AM KIDS: Mindful Play",
+     "instructor": "Ashlin  Kerr",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "11:00",
+     "name": "11AM UNWIND: Fascial Maneuvers",
+     "instructor": "Daniel Lovelock, LMT",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "17:30",
+     "name": "5:30PM Yoga Sculpt: OVO October\ud83e\udd89",
+     "instructor": "Marina Hale",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "19:00",
+     "name": "7PM PILATES: Mat",
+     "instructor": "Courtney Voss",
+     "discipline": "pilates"
     }
    ],
    "error": null
@@ -268,34 +261,6 @@
    "booking_url": "https://momence.com/u/golden-hour-yoga-and-tea-house-qDBgJS",
    "discipline": "yoga",
    "classes": [
-    {
-     "date": "2026-10-06",
-     "time": "18:00",
-     "name": "Feel-Good Flow",
-     "instructor": "Leslie  Donovan",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "05:30",
-     "name": "Sunrise Flow",
-     "instructor": "Makenna  Curtis",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "08:30",
-     "name": "Beginner Flow",
-     "instructor": "Sydney  Geci",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "10:00",
-     "name": "Gentle Yoga",
-     "instructor": "Kaitlyn  Mulford",
-     "discipline": "yoga"
-    },
     {
      "date": "2026-10-07",
      "time": "12:00",
@@ -386,6 +351,13 @@
      "name": "Restorative",
      "instructor": "Katie  French",
      "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "18:00",
+     "name": "Feel-Good Flow",
+     "instructor": "Katherine  Vanselow",
+     "discipline": "yoga"
     }
    ],
    "error": null
@@ -398,41 +370,6 @@
    "booking_url": "https://app.fitdegree.com/t/dashboard/fitspot/74",
    "discipline": "yoga",
    "classes": [
-    {
-     "date": "2026-10-06",
-     "time": "06:30",
-     "name": "Disko Hot Pilates 45 \ud83d\udd25",
-     "instructor": "Katelyn F",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "09:30",
-     "name": "Disko Flow 60 \ud83d\udd25",
-     "instructor": "Katie R",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "16:30",
-     "name": "Disko Hot Pilates 45 \ud83d\udd25",
-     "instructor": "Briana K",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "17:45",
-     "name": "Disko Yoga Sculpt 45\ud83d\udd25",
-     "instructor": "Katie P",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "18:45",
-     "name": "Warm Slow Flow into Yin",
-     "instructor": "Sabrina M",
-     "discipline": "yoga"
-    },
     {
      "date": "2026-10-07",
      "time": "06:30",
@@ -586,6 +523,41 @@
      "name": "Disko Flow 60 \ud83d\udd25",
      "instructor": "Mo R",
      "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "06:30",
+     "name": "Disko Hot Pilates 45 \ud83d\udd25",
+     "instructor": "Katelyn F",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "09:30",
+     "name": "Disko Flow 60 \ud83d\udd25",
+     "instructor": "Katie R",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "16:30",
+     "name": "Disko Hot Pilates 45 \ud83d\udd25",
+     "instructor": "Briana K",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "17:45",
+     "name": "Disko Yoga Sculpt 45\ud83d\udd25",
+     "instructor": "Katie P",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "18:45",
+     "name": "Warm Slow Flow into Yin",
+     "instructor": "Mo R",
+     "discipline": "yoga"
     }
    ],
    "error": null
@@ -598,48 +570,6 @@
    "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
    "discipline": "yoga",
    "classes": [
-    {
-     "date": "2026-10-06",
-     "time": "08:30",
-     "name": "Hot Vinyasa II",
-     "instructor": "Lisa Breitenwischer",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "12:00",
-     "name": "Hot  Energizing Full Body Flow",
-     "instructor": "Chassidy Fitkin",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "16:00",
-     "name": "Empowered Warrior Flow (warm)",
-     "instructor": "Sara Dean",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "17:30",
-     "name": "Come as You Are Yoga",
-     "instructor": "Rachel Earl",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "17:30",
-     "name": "HOT Flow YOGA",
-     "instructor": "Marc Reagan",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "19:15",
-     "name": "Rockasana: Yoga Flow",
-     "instructor": "Marc Reagan",
-     "discipline": "yoga"
-    },
     {
      "date": "2026-10-07",
      "time": "08:30",
@@ -803,23 +733,9 @@
     },
     {
      "date": "2026-10-10",
-     "time": "11:30",
-     "name": "INTENSE WARM Yoga & Mobility (Experienced Yogis)",
-     "instructor": "Vananh Vu",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-10",
      "time": "16:00",
      "name": "HOT Yoga Remix",
      "instructor": "Lora Guy",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-11",
-     "time": "09:00",
-     "name": "HOT Yoga Caliente",
-     "instructor": "Vananh Vu",
      "discipline": "yoga"
     },
     {
@@ -891,6 +807,62 @@
      "name": "HOT EDM POWER",
      "instructor": "Hannah Ovington",
      "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "08:30",
+     "name": "Hot Vinyasa II",
+     "instructor": "Lisa Breitenwischer",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "09:00",
+     "name": "Restorative Yoga Practice",
+     "instructor": "Fallon Brown",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "12:00",
+     "name": "Creative Vinyasa Rasa Flow",
+     "instructor": "Rebecca Sathre",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "12:00",
+     "name": "Hot  Energizing Full Body Flow",
+     "instructor": "Chassidy Fitkin",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "16:00",
+     "name": "Empowered Warrior Flow (warm)",
+     "instructor": "Sara Dean",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "17:30",
+     "name": "Come as You Are Yoga",
+     "instructor": "Rachel Earl",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "17:30",
+     "name": "HOT Flow YOGA",
+     "instructor": "Marc Reagan",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "19:15",
+     "name": "Rockasana: Yoga Flow",
+     "instructor": "Marc Reagan",
+     "discipline": "yoga"
     }
    ],
    "error": null
@@ -903,20 +875,6 @@
    "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
    "discipline": "yoga",
    "classes": [
-    {
-     "date": "2026-10-06",
-     "time": "10:30",
-     "name": "Intermediate Beginner Yoga Flow",
-     "instructor": "Shannon Campbell",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "17:45",
-     "name": "Radiate & Reflect",
-     "instructor": "Elizabeth Hood",
-     "discipline": "yoga"
-    },
     {
      "date": "2026-10-07",
      "time": "10:00",
@@ -986,6 +944,20 @@
      "name": "Sweet Slow Flow Yoga",
      "instructor": "Jackie Morrow",
      "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "10:30",
+     "name": "Intermediate Beginner Yoga Flow",
+     "instructor": "Shannon Campbell",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "17:45",
+     "name": "Radiate & Reflect",
+     "instructor": "Elizabeth Hood",
+     "discipline": "yoga"
     }
    ],
    "error": null
@@ -998,27 +970,6 @@
    "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
    "discipline": "yoga",
    "classes": [
-    {
-     "date": "2026-10-06",
-     "time": "06:00",
-     "name": "Mysore Style Ashtanga: Self-Practice & Individual Guidance",
-     "instructor": "Dagan Stafford",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "09:30",
-     "name": "Light & Blissful Yoga Flow",
-     "instructor": "Natalie Pinter",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "12:00",
-     "name": "HOT YOGA FLOW",
-     "instructor": "Alexandra Amaya",
-     "discipline": "yoga"
-    },
     {
      "date": "2026-10-07",
      "time": "06:00",
@@ -1066,13 +1017,6 @@
      "time": "12:00",
      "name": "Warm Vinyasa Flow",
      "instructor": "Natalie Pinter",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-08",
-     "time": "18:00",
-     "name": "Hot Power Yoga",
-     "instructor": "Adella Cushing",
      "discipline": "yoga"
     },
     {
@@ -1165,6 +1109,27 @@
      "name": "HOT Sweet & Sweaty Radiant Yoga",
      "instructor": "Rebecca Sathre",
      "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "06:00",
+     "name": "Mysore Style Ashtanga: Self-Practice & Individual Guidance",
+     "instructor": "Dagan Stafford",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "09:30",
+     "name": "Light & Blissful Yoga Flow",
+     "instructor": "Natalie Pinter",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "12:00",
+     "name": "HOT YOGA FLOW",
+     "instructor": "Alexandra Amaya",
+     "discipline": "yoga"
     }
    ],
    "error": null
@@ -1187,20 +1152,6 @@
    "booking_url": "https://floridapoweryogapensacola.sites.zenplanner.com/calendar.cfm",
    "discipline": "yoga",
    "classes": [
-    {
-     "date": "2026-10-06",
-     "time": "06:15",
-     "name": "Core Power",
-     "instructor": "Todd Timmons",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "17:30",
-     "name": "Warm Gentle Flow",
-     "instructor": "Sarah Epler",
-     "discipline": "yoga"
-    },
     {
      "date": "2026-10-07",
      "time": "06:15",
@@ -1277,6 +1228,27 @@
      "name": "Core Power",
      "instructor": "Todd Timmons",
      "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "06:15",
+     "name": "Core Power",
+     "instructor": "Todd Timmons",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "10:00",
+     "name": "Stretch",
+     "instructor": "Todd Timmons",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "17:30",
+     "name": "Warm Gentle Flow",
+     "instructor": "Sarah Epler",
+     "discipline": "yoga"
     }
    ],
    "error": null
@@ -1290,41 +1262,6 @@
    "discipline": "pilates",
    "classes": [
     {
-     "date": "2026-10-06",
-     "time": "12:00",
-     "name": "Reformer",
-     "instructor": "Beth Adair",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "16:30",
-     "name": "Reformer + Chair",
-     "instructor": "Moe Banks",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "17:30",
-     "name": "Reformer",
-     "instructor": "Moe Banks",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "06:30",
-     "name": "Reformer",
-     "instructor": "Brandi Rodriguez",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "09:00",
-     "name": "Reformer",
-     "instructor": "Brandi Rodriguez",
-     "discipline": "pilates"
-    },
-    {
      "date": "2026-10-07",
      "time": "12:00",
      "name": "Advanced Reformer",
@@ -1335,14 +1272,14 @@
      "date": "2026-10-07",
      "time": "16:00",
      "name": "Reformer",
-     "instructor": "Kiley Manning",
+     "instructor": "Claire Clark",
      "discipline": "pilates"
     },
     {
      "date": "2026-10-07",
      "time": "17:30",
      "name": "Reformer",
-     "instructor": "Kiley Manning",
+     "instructor": "Claire Clark",
      "discipline": "pilates"
     },
     {
@@ -1456,6 +1393,48 @@
      "name": "Reformer",
      "instructor": "Hylene Garcia",
      "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "06:00",
+     "name": "Reformer",
+     "instructor": "Matea Molina",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "07:00",
+     "name": "Power Reformer",
+     "instructor": "Matea Molina",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "09:00",
+     "name": "Reformer",
+     "instructor": "Hylene Garcia",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "12:00",
+     "name": "Reformer",
+     "instructor": "Kiley Manning",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "16:30",
+     "name": "Reformer + Chair",
+     "instructor": "Moe Banks",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "17:30",
+     "name": "Reformer",
+     "instructor": "Moe Banks",
+     "discipline": "pilates"
     }
    ],
    "error": null
@@ -1469,52 +1448,10 @@
    "discipline": "pilates",
    "classes": [
     {
-     "date": "2026-10-06",
-     "time": "17:30",
-     "name": "Power",
-     "instructor": "Hylene Garcia",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "05:30",
-     "name": "Strength",
-     "instructor": "SJ Blakely",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "06:30",
-     "name": "Walking Club",
-     "instructor": "SJ Blakely",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "08:00",
-     "name": "Barre",
-     "instructor": "Moe Banks",
-     "discipline": "pilates"
-    },
-    {
      "date": "2026-10-07",
      "time": "11:00",
      "name": "Pilates Mat",
      "instructor": "Jessica Dudley",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "16:30",
-     "name": "Power",
-     "instructor": "Claire Clark",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "17:30",
-     "name": "Pilates Mat",
-     "instructor": "Claire Clark",
      "discipline": "pilates"
     },
     {
@@ -1607,6 +1544,20 @@
      "name": "Strength",
      "instructor": "Matea Molina",
      "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "09:00",
+     "name": "TRX",
+     "instructor": "Brandi Rodriguez",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "17:30",
+     "name": "Power",
+     "instructor": "Hylene Garcia",
+     "discipline": "pilates"
     }
    ],
    "error": null
@@ -1619,27 +1570,6 @@
    "booking_url": "https://momence.com/u/wild-lemon-qXgxVr",
    "discipline": "pilates",
    "classes": [
-    {
-     "date": "2026-10-06",
-     "time": "16:30",
-     "name": "Reformer",
-     "instructor": "Matea Molina",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-06",
-     "time": "17:30",
-     "name": "Tower",
-     "instructor": "Matea Molina",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "09:00",
-     "name": "Reformer",
-     "instructor": "Matea Molina",
-     "discipline": "pilates"
-    },
     {
      "date": "2026-10-07",
      "time": "16:00",
@@ -1723,6 +1653,41 @@
      "name": "Pilates Mat",
      "instructor": "Claire Clark",
      "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "05:30",
+     "name": "Reformer",
+     "instructor": "Claire Clark",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "09:00",
+     "name": "Tower",
+     "instructor": "Beth Adair",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "10:00",
+     "name": "Pilates Mat",
+     "instructor": "Beth Adair",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "16:30",
+     "name": "Reformer",
+     "instructor": "Matea Molina",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "17:30",
+     "name": "Tower",
+     "instructor": "Matea Molina",
+     "discipline": "pilates"
     }
    ],
    "error": null
@@ -1735,48 +1700,6 @@
    "booking_url": "https://www.gadsdenstudio.com/class-schedule",
    "discipline": "pilates",
    "classes": [
-    {
-     "date": "2026-10-06",
-     "time": "17:30",
-     "name": "Equipment Class",
-     "instructor": "Arielle Langhorne",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "06:00",
-     "name": "Equipment Class",
-     "instructor": "Isabel Wimmer",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "07:15",
-     "name": "Equipment Class",
-     "instructor": "Jocelyn",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "08:30",
-     "name": "Equipment Class",
-     "instructor": "Isabel Wimmer",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "09:40",
-     "name": "Equipment Class",
-     "instructor": "Jeannie",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-10-07",
-     "time": "10:50",
-     "name": "Equipment Class",
-     "instructor": "Jeannie",
-     "discipline": "pilates"
-    },
     {
      "date": "2026-10-07",
      "time": "16:15",
@@ -1872,7 +1795,7 @@
      "date": "2026-10-09",
      "time": "08:50",
      "name": "Equipment Class",
-     "instructor": "Lindsey",
+     "instructor": "Arielle Langhorne",
      "discipline": "pilates"
     },
     {
@@ -1985,6 +1908,48 @@
      "time": "17:30",
      "name": "Equipment Class",
      "instructor": "Jessica",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "06:00",
+     "name": "Equipment Class",
+     "instructor": "Isabel Wimmer",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "07:15",
+     "name": "Equipment Class",
+     "instructor": "Arielle Langhorne",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "09:40",
+     "name": "Pilates Sculpt (Mat class)",
+     "instructor": "Loryn Smith",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "09:40",
+     "name": "Equipment Class",
+     "instructor": "Sussanna",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "10:50",
+     "name": "Pilates for Longevity (for seniors 65+)",
+     "instructor": "Jeannie",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-10-13",
+     "time": "17:30",
+     "name": "Equipment Class",
+     "instructor": "Arielle Langhorne",
      "discipline": "pilates"
     }
    ],
