@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-11-22T12:13-06:00",
- "week_start": "2026-11-22",
- "week_end": "2026-11-28",
+ "generated_at": "2026-11-23T16:27-06:00",
+ "week_start": "2026-11-23",
+ "week_end": "2026-11-29",
  "timezone": "America/Chicago",
  "studios": [
   {
@@ -12,7 +12,7 @@
    "booking_url": "https://momence.com/u/lovelock-healing-arts-WO7t6K",
    "discipline": "yoga",
    "classes": [],
-   "error": "400 Client Error: Bad Request for url: https://readonly-api.momence.com/host-plugins/host/14136/host-schedule/sessions?startDate=2026-11-22&endDate=2026-11-29&pageSize=500"
+   "error": "400 Client Error: Bad Request for url: https://readonly-api.momence.com/host-plugins/host/14136/host-schedule/sessions?startDate=2026-11-23&endDate=2026-11-30&pageSize=500"
   },
   {
    "name": "Golden Hour Yoga & Tea House",
@@ -22,7 +22,7 @@
    "booking_url": "https://momence.com/u/golden-hour-yoga-and-tea-house-qDBgJS",
    "discipline": "yoga",
    "classes": [],
-   "error": "400 Client Error: Bad Request for url: https://readonly-api.momence.com/host-plugins/host/123215/host-schedule/sessions?startDate=2026-11-22&endDate=2026-11-29&pageSize=500"
+   "error": "400 Client Error: Bad Request for url: https://readonly-api.momence.com/host-plugins/host/123215/host-schedule/sessions?startDate=2026-11-23&endDate=2026-11-30&pageSize=500"
   },
   {
    "name": "Disko Lemonade Yoga",
@@ -32,34 +32,6 @@
    "booking_url": "https://app.fitdegree.com/t/dashboard/fitspot/74",
    "discipline": "yoga",
    "classes": [
-    {
-     "date": "2026-11-22",
-     "time": "07:30",
-     "name": "Disko Yoga Sculpt 45\ud83d\udd25",
-     "instructor": "Danni M",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-11-22",
-     "time": "08:45",
-     "name": "Disko Hot Pilates 45 \ud83d\udd25",
-     "instructor": "Briana K",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-11-22",
-     "time": "10:00",
-     "name": "Disko Flow 60 \ud83d\udd25",
-     "instructor": "Briana K",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-11-22",
-     "time": "18:00",
-     "name": "Candlelight Warm Slow Flow Into Yin",
-     "instructor": "Someone Awesome",
-     "discipline": "yoga"
-    },
     {
      "date": "2026-11-23",
      "time": "06:30",
@@ -71,7 +43,7 @@
      "date": "2026-11-23",
      "time": "09:00",
      "name": "Disko Hot Pilates 45 \ud83d\udd25",
-     "instructor": "Briana K",
+     "instructor": "Sophie T",
      "discipline": "pilates"
     },
     {
@@ -185,6 +157,34 @@
      "name": "Disko Flow 60 \ud83d\udd25",
      "instructor": "Jason D",
      "discipline": "yoga"
+    },
+    {
+     "date": "2026-11-29",
+     "time": "07:30",
+     "name": "Disko Yoga Sculpt 45\ud83d\udd25",
+     "instructor": "Danni M",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-11-29",
+     "time": "08:45",
+     "name": "Disko Hot Pilates 45 \ud83d\udd25",
+     "instructor": "Briana K",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-11-29",
+     "time": "10:00",
+     "name": "Disko Flow 60 \ud83d\udd25",
+     "instructor": "Briana K",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-11-29",
+     "time": "18:00",
+     "name": "Candlelight Warm Slow Flow Into Yin",
+     "instructor": "Sabrina M",
+     "discipline": "yoga"
     }
    ],
    "error": null
@@ -198,52 +198,10 @@
    "discipline": "yoga",
    "classes": [
     {
-     "date": "2026-11-22",
-     "time": "09:00",
-     "name": "HOT Yoga Caliente",
-     "instructor": "Vananh Vu",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-11-22",
-     "time": "15:30",
-     "name": "Warm Self Love Slow Flow",
-     "instructor": "Alyssa Ferrer",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-11-22",
-     "time": "17:00",
-     "name": "Mellow Flow",
-     "instructor": "Meghan McMillan",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-11-22",
-     "time": "17:00",
-     "name": "Hot Vinyasa Flow",
-     "instructor": "Rebecca Sathre",
-     "discipline": "yoga"
-    },
-    {
      "date": "2026-11-23",
      "time": "08:35",
      "name": "Hot Strengthening Vinyasa Flow +Soul",
      "instructor": "Julie Graham",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-11-23",
-     "time": "09:00",
-     "name": "Power & Purpose",
-     "instructor": "Chassidy Fitkin",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-11-23",
-     "time": "12:00",
-     "name": "Hot Vinyasa Power Flow",
-     "instructor": "Josh O'Leary",
      "discipline": "yoga"
     },
     {
@@ -437,13 +395,6 @@
     },
     {
      "date": "2026-11-27",
-     "time": "14:00",
-     "name": "Slow Flow with Marni",
-     "instructor": "Marni Marni",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-11-27",
      "time": "17:30",
      "name": "HOT Heart Opening Yoga Flow",
      "instructor": "Danielle Voss",
@@ -476,6 +427,34 @@
      "name": "HOT Yoga Remix",
      "instructor": "Lora Guy",
      "discipline": "yoga"
+    },
+    {
+     "date": "2026-11-29",
+     "time": "09:00",
+     "name": "HOT Yoga Caliente",
+     "instructor": "Vananh Vu",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-11-29",
+     "time": "15:30",
+     "name": "Warm Self Love Slow Flow",
+     "instructor": "Alyssa Ferrer",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-11-29",
+     "time": "17:00",
+     "name": "Mellow Flow",
+     "instructor": "Sara Dean",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-11-29",
+     "time": "17:00",
+     "name": "Hot Vinyasa Flow",
+     "instructor": "Rebecca Sathre",
+     "discipline": "yoga"
     }
    ],
    "error": null
@@ -488,20 +467,6 @@
    "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
    "discipline": "yoga",
    "classes": [
-    {
-     "date": "2026-11-22",
-     "time": "10:00",
-     "name": "Weekend Reset",
-     "instructor": "Rachel Blackwelder",
-     "discipline": "yoga"
-    },
-    {
-     "date": "2026-11-22",
-     "time": "18:30",
-     "name": "Candlelight Restorative Yoga",
-     "instructor": "Tiffany Miller",
-     "discipline": "yoga"
-    },
     {
      "date": "2026-11-23",
      "time": "10:30",
@@ -550,6 +515,20 @@
      "name": "M & M Yoga  (Meaningful Movement Yoga)",
      "instructor": "Jackie Morrow",
      "discipline": "yoga"
+    },
+    {
+     "date": "2026-11-28",
+     "time": "11:00",
+     "name": "Blindfold Yoga With Jackie",
+     "instructor": "Jackie Morrow",
+     "discipline": "yoga"
+    },
+    {
+     "date": "2026-11-29",
+     "time": "18:30",
+     "name": "Candlelight Restorative Yoga",
+     "instructor": "Tiffany Miller",
+     "discipline": "yoga"
     }
    ],
    "error": null
@@ -562,13 +541,6 @@
    "booking_url": "https://clients.mindbodyonline.com/classic/ws?studioid=43474",
    "discipline": "yoga",
    "classes": [
-    {
-     "date": "2026-11-22",
-     "time": "09:30",
-     "name": "HOT Yoga Flow",
-     "instructor": "Rebecca Sathre",
-     "discipline": "yoga"
-    },
     {
      "date": "2026-11-23",
      "time": "06:00",
@@ -694,6 +666,13 @@
      "name": "Warm Power Flow Yoga",
      "instructor": "Lisa Breitenwischer",
      "discipline": "yoga"
+    },
+    {
+     "date": "2026-11-29",
+     "time": "09:30",
+     "name": "HOT Yoga Flow",
+     "instructor": "Rebecca Sathre",
+     "discipline": "yoga"
     }
    ],
    "error": null
@@ -797,7 +776,7 @@
    "booking_url": "https://momence.com/u/wild-lemon-qXgxVr",
    "discipline": "pilates",
    "classes": [],
-   "error": "400 Client Error: Bad Request for url: https://readonly-api.momence.com/host-plugins/host/42021/host-schedule/sessions?startDate=2026-11-22&endDate=2026-11-29&pageSize=500"
+   "error": "400 Client Error: Bad Request for url: https://readonly-api.momence.com/host-plugins/host/42021/host-schedule/sessions?startDate=2026-11-23&endDate=2026-11-30&pageSize=500"
   },
   {
    "name": "Wild Lemon \u2014 12th Ave",
@@ -807,7 +786,7 @@
    "booking_url": "https://momence.com/u/wild-lemon-qXgxVr",
    "discipline": "pilates",
    "classes": [],
-   "error": "400 Client Error: Bad Request for url: https://readonly-api.momence.com/host-plugins/host/42021/host-schedule/sessions?startDate=2026-11-22&endDate=2026-11-29&pageSize=500"
+   "error": "400 Client Error: Bad Request for url: https://readonly-api.momence.com/host-plugins/host/42021/host-schedule/sessions?startDate=2026-11-23&endDate=2026-11-30&pageSize=500"
   },
   {
    "name": "Wild Lemon \u2014 Gulf Breeze",
@@ -817,7 +796,7 @@
    "booking_url": "https://momence.com/u/wild-lemon-qXgxVr",
    "discipline": "pilates",
    "classes": [],
-   "error": "400 Client Error: Bad Request for url: https://readonly-api.momence.com/host-plugins/host/42021/host-schedule/sessions?startDate=2026-11-22&endDate=2026-11-29&pageSize=500"
+   "error": "400 Client Error: Bad Request for url: https://readonly-api.momence.com/host-plugins/host/42021/host-schedule/sessions?startDate=2026-11-23&endDate=2026-11-30&pageSize=500"
   },
   {
    "name": "The Gadsden Studio",
@@ -827,55 +806,6 @@
    "booking_url": "https://www.gadsdenstudio.com/class-schedule",
    "discipline": "pilates",
    "classes": [
-    {
-     "date": "2026-11-23",
-     "time": "06:00",
-     "name": "Equipment Class",
-     "instructor": "Jocelyn",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-11-23",
-     "time": "07:15",
-     "name": "Power Sculpt",
-     "instructor": "Nicole Henshaw",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-11-23",
-     "time": "07:15",
-     "name": "Equipment Class",
-     "instructor": "Loryn Smith",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-11-23",
-     "time": "08:30",
-     "name": "Equipment Class",
-     "instructor": "Loryn Smith",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-11-23",
-     "time": "09:40",
-     "name": "Equipment Class",
-     "instructor": "Loryn Smith",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-11-23",
-     "time": "10:45",
-     "name": "The Gadsden Stroll",
-     "instructor": "Loryn Smith",
-     "discipline": "pilates"
-    },
-    {
-     "date": "2026-11-23",
-     "time": "11:10",
-     "name": "Pilates for Longevity (for seniors 65+)",
-     "instructor": "Jeannie",
-     "discipline": "pilates"
-    },
     {
      "date": "2026-11-23",
      "time": "16:15",
@@ -1126,6 +1056,20 @@
      "time": "11:10",
      "name": "Pilates for Longevity (for seniors 65+)",
      "instructor": "Lindsey",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-11-29",
+     "time": "08:50",
+     "name": "Stretch and Release",
+     "instructor": "Isabel Wimmer",
+     "discipline": "pilates"
+    },
+    {
+     "date": "2026-11-29",
+     "time": "10:00",
+     "name": "Equipment Class",
+     "instructor": "Alexa Frieberg",
      "discipline": "pilates"
     }
    ],
